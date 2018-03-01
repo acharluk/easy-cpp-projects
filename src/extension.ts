@@ -30,9 +30,11 @@ export function activate(context: vscode.ExtensionContext) {
                         vscode.workspace.openTextDocument(vscode.workspace.rootPath + '/src/main.cpp')
                         .then(doc => vscode.window.showTextDocument(doc));
                     }
-                });
+                })
+                .catch(error => console.error("Easy C++ Projects error: " + error));
             });
-        });
+        })
+        .catch(error => console.error("Easy C++ Projects error: " + error));
     });
 
     context.subscriptions.push(createProjectCommand);
