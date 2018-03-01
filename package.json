@@ -2,8 +2,11 @@
     "name": "easy-cpp-projects",
     "displayName": "Easy C++ projects",
     "description": "Create C++ projects easily for GCC and WSL-GCC",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "publisher": "ACharLuk",
+    "repository": {
+        "url": "https://github.com/acharluk/easy-cpp-projects"
+    },
     "engines": {
         "vscode": "^1.20.0"
     },
