@@ -1,0 +1,14 @@
+{
+    "directories":[
+        ".vscode",
+        "bin",
+        "include",
+        "lib",
+        "src"
+    ],
+    "download":[
+        "Makefile",
+        "src/main.cpp",
+        ".vscode/tasks.json"
+    ]
+}
