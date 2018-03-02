@@ -9,13 +9,19 @@ Easy C++ projects will create the following:
 
 ## Requirements
 
-You should install C/C++ extension for the best experience
+- You must have GCC and Make installed on your computer
+    - How to install GCC and Make on Windows through WSL: [Windows Subsystem for Linux setup](https://github.com/acharluk/UsefulStuff/blob/master/windows/setup_wsl.md)
+- You should install C/C++ extension for the best experience
 
 ## Extension Settings
 
 ## Known Issues
 
 ## Release Notes
+
+### 1.0.1
+
+Update readme to add WSL setup link
 
 ### 1.0.0
 
