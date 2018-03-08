@@ -9,6 +9,7 @@
     "download":[
         "Makefile",
         "src/main.cpp",
-        ".vscode/tasks.json"
+        ".vscode/tasks.json",
+        ".vscode/launch.json"
     ]
 }
