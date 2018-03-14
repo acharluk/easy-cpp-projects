@@ -11,6 +11,11 @@
             "Makefile":"Makefile",
             "tasks.json":".vscode/tasks.json",
             "hello-world/main.cpp": "src/main.cpp"
+        },
+        "empty":{
+            "Makefile":"Makefile",
+            "tasks.json":".vscode/tasks.json",
+            "empty/main.cpp": "src/main.cpp"
         }
     }
     
