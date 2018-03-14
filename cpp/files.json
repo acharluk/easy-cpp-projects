@@ -6,9 +6,12 @@
         "lib",
         "src"
     ],
-    "download":[
-        "Makefile",
-        "src/main.cpp",
-        ".vscode/tasks.json"
-    ]
+    "templates":{
+        "hello-world":[
+            "Makefile",
+            "src/main.cpp",
+            ".vscode/tasks.json"
+        ]
+    }
+    
 }
