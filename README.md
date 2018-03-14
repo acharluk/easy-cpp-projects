@@ -19,10 +19,6 @@ Easy C++ projects will create the following:
 
 ## Release Notes
 
-### 1.0.1
+### 1.1.0
 
-Update readme to add WSL setup link
-
-### 1.0.0
-
-Initial release of Easy C++ projects
+Added support for multiple templates
