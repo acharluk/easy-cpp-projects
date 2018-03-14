@@ -7,11 +7,11 @@
         "src"
     ],
     "templates":{
-        "hello-world":[
-            "Makefile",
-            "src/main.cpp",
-            ".vscode/tasks.json"
-        ]
+        "hello-world":{
+            "Makefile":"Makefile",
+            "tasks.json":".vscode/tasks.json",
+            "hello-world/main.cpp": "src/main.cpp"
+        }
     }
     
 }
