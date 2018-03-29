@@ -1,3 +1,5 @@
+[![Version][version-badge]][marketplace]
+[![Installs][installs-badge]][marketplace]
 ## Features
 
 Create C++ projects with just one click.
@@ -31,3 +33,7 @@ Easy C++ projects will create the following:
 Optimizations
 
 Updated readme
+
+[version-badge]: https://vsmarketplacebadge.apphb.com/version/ACharLuk.easy-cpp-projects.svg
+[installs-badge]: https://vsmarketplacebadge.apphb.com/installs/ACharLuk.easy-cpp-projects.svg
+[marketplace]: https://marketplace.visualstudio.com/items?itemName=ACharLuk.easy-cpp-projects
