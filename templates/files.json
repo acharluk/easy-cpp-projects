@@ -8,18 +8,18 @@
     ],
     "templates":{
         "Empty":{
-            "Makefile":"Makefile",
-            "tasks.json":".vscode/tasks.json",
+            "shared/Makefile":"Makefile",
+            "shared/tasks.json":".vscode/tasks.json",
             "empty/main.cpp": "src/main.cpp"
         },
         "Hello world":{
-            "Makefile":"Makefile",
-            "tasks.json":".vscode/tasks.json",
+            "shared/Makefile":"Makefile",
+            "shared/tasks.json":".vscode/tasks.json",
             "hello-world/main.cpp": "src/main.cpp"
         },
-        "Cygwin/MinGW":{
-            "Makefile":"Makefile",
-            "cygwin_mingw/tasks.json":".vscode/tasks.json",
+        "WSL (Windows Subsystem for Linux)":{
+            "shared/Makefile":"Makefile",
+            "wsl/tasks.json":".vscode/tasks.json",
             "hello-world/main.cpp": "src/main.cpp"
         }
     }
