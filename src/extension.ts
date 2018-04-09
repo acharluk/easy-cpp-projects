@@ -13,6 +13,10 @@ interface EasyFilesJSON {
 
 export function activate(context: vscode.ExtensionContext) {
     let createProjectCommand = vscode.commands.registerCommand('easycpp.createProject', () => {
+        if (!vscode.workspace.workspaceFolders) {
+            vscode.window.showErrorMessage("Open a folder before creating a project!");
+            return;
+        }
         fetch(baseUrl + '/templates/files.json')
             .then(res => res.json())
             .then(data => {
