@@ -1,6 +1,14 @@
 # Change Log
 
-### 1.1.1
+## 1.1.3
+
+Fix error messages not being shown
+
+## 1.1.2
+
+Force user to open a folder before creating a project
+
+## 1.1.1
 
 Optimizations
 

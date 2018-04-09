@@ -28,11 +28,9 @@ Easy C++ projects will create the following:
 
 ## Release Notes
 
-### 1.1.1
+### 1.1.3
 
-Optimizations
-
-Updated readme
+Fix error messages not being shown
 
 [version-badge]: https://vsmarketplacebadge.apphb.com/version/ACharLuk.easy-cpp-projects.svg
 [installs-badge]: https://vsmarketplacebadge.apphb.com/installs/ACharLuk.easy-cpp-projects.svg

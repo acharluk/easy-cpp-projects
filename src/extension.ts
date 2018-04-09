@@ -26,7 +26,7 @@ export function activate(context: vscode.ExtensionContext) {
                 vscode.window.showQuickPick(templates)
                 .then(selected => downloadTemplate(data, selected));
             })
-            .catch(error => console.error("Easy C++ Projects error: Could not fetch 'files.json' from GitHub\nError: " + error));
+            .catch(error => vscode.window.showErrorMessage("Easy C++ Projects error: Could not fetch 'files.json' from GitHub\nError: " + error));
     });
 
     context.subscriptions.push(createProjectCommand);
@@ -54,6 +54,6 @@ function downloadTemplate(files: EasyFilesJSON, templateName: string | undefined
                 .then(doc => vscode.window.showTextDocument(doc));
             }
         })
-        .catch(error => console.error(`Easy C++ Projects error: Could not download '${file}' from GitHub\nError: ` + error));
+        .catch(error => vscode.window.showErrorMessage(`Easy C++ Projects error: Could not download '${file}' from GitHub\nError: ` + error));
     }
 }
