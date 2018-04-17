@@ -24,7 +24,7 @@
             "command": "bash",
             "args": [
                 "-c",
-                "'make run'"
+                "make run"
             ]
         }
     ]
