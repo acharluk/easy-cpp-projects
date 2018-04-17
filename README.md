@@ -28,9 +28,9 @@ Easy C++ projects will create the following:
 
 ## Release Notes
 
-### 1.1.3
+### 1.1.4
 
-Fix error messages not being shown
+Add a logo to the extension!
 
 [version-badge]: https://vsmarketplacebadge.apphb.com/version/ACharLuk.easy-cpp-projects.svg
 [installs-badge]: https://vsmarketplacebadge.apphb.com/installs/ACharLuk.easy-cpp-projects.svg

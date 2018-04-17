@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.1.4
+
+Add a logo to the extension!
+
 ## 1.1.3
 
 Fix error messages not being shown
