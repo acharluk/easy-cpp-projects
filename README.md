@@ -28,9 +28,10 @@ Easy C++ projects will create the following:
 
 ## Release Notes
 
-### 1.1.4
+### 1.2.0
 
-Add a logo to the extension!
+Add support for multi-root workspaces
+
 
 [version-badge]: https://vsmarketplacebadge.apphb.com/version/ACharLuk.easy-cpp-projects.svg
 [installs-badge]: https://vsmarketplacebadge.apphb.com/installs/ACharLuk.easy-cpp-projects.svg

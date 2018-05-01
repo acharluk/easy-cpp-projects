@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.2.0
+
+Add support for multi-root workspaces
+
 ## 1.1.4
 
 Add a logo to the extension!

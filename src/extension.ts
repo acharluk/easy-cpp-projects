@@ -14,7 +14,7 @@ interface EasyFilesJSON {
 export function activate(context: vscode.ExtensionContext) {
     let createProjectCommand = vscode.commands.registerCommand('easycpp.createProject', () => {
         if (!vscode.workspace.workspaceFolders) {
-            vscode.window.showErrorMessage("Open a folder before creating a project!");
+            vscode.window.showErrorMessage("Open a folder or workspace before creating a project!");
             return;
         }
         fetch(baseUrl + '/templates/files.json')
@@ -24,7 +24,7 @@ export function activate(context: vscode.ExtensionContext) {
                 for (let tname in data.templates) { templates.push(tname); }
 
                 vscode.window.showQuickPick(templates)
-                .then(selected => downloadTemplate(data, selected));
+                .then(selected => selectFolderAndDownload(data, selected));
             })
             .catch(error => vscode.window.showErrorMessage("Easy C++ Projects error: Could not fetch 'files.json' from GitHub\nError: " + error));
     });
@@ -35,12 +35,35 @@ export function activate(context: vscode.ExtensionContext) {
 export function deactivate() {
 }
 
-function downloadTemplate(files: EasyFilesJSON, templateName: string | undefined): void {
-    if (!templateName) { return; }
+function selectFolderAndDownload(files: EasyFilesJSON, templateName: string | undefined): void {
+    let folders = vscode.workspace.workspaceFolders;
+    if (!templateName || !folders) { return; }
+    
+    if (folders.length > 1) {
+        let foldernames: vscode.QuickPickItem[] = [];
+        if (folders) {
+            folders.forEach(e => {
+                foldernames.push({ label: e.uri.fsPath, description: "", detail: undefined});
+            });
+        } else {
+            return;
+        }
+        
+        vscode.window.showQuickPick(foldernames)
+        .then(chosen => {
+            if (!chosen) { return; }
+            let folder = chosen.label;
+            downloadTemplate(files, templateName, folder);
+        });
+    } else {
+        downloadTemplate(files, templateName, folders[0].uri.fsPath);
+    }
+}
 
+function downloadTemplate(files: EasyFilesJSON, templateName: string, folder: string): void {
     files.directories.forEach((dir: string) => {
-        if (!existsSync(vscode.workspace.rootPath + '/' + dir)) {
-            mkdirSync(vscode.workspace.rootPath + '/' + dir);
+        if (!existsSync(folder + '/' + dir)) {
+            mkdirSync(folder + '/' + dir);
         }
     });
 
@@ -48,9 +71,9 @@ function downloadTemplate(files: EasyFilesJSON, templateName: string | undefined
         fetch(baseUrl + '/templates/' + "/" + file)
         .then(res => res.text())
         .then(data => {
-            writeFileSync(vscode.workspace.rootPath + '/' + files.templates[templateName][file], data);
+            writeFileSync(folder + '/' + files.templates[templateName][file], data);
             if (files.templates[templateName][file] === 'src/main.cpp') {
-                vscode.workspace.openTextDocument(vscode.workspace.rootPath + '/src/main.cpp')
+                vscode.workspace.openTextDocument(folder + '/src/main.cpp')
                 .then(doc => vscode.window.showTextDocument(doc));
             }
         })
