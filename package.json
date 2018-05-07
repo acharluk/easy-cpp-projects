@@ -15,14 +15,19 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:easycpp.createProject"
+        "onCommand:easycpp.createProject",
+        "onCommand:easycpp.createClass"
     ],
     "main": "./out/extension",
     "contributes": {
         "commands": [
             {
                 "command": "easycpp.createProject",
-                "title": "Create C++ project"
+                "title": "Easy Cpp/C++: Create new C++ project"
+            },
+            {
+                "command": "easycpp.createClass",
+                "title": "Easy Cpp/C++: Create new class"
             }
         ]
     },

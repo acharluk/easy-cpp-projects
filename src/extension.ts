@@ -12,28 +12,56 @@ interface EasyFilesJSON {
 }
 
 export function activate(context: vscode.ExtensionContext) {
-    let createProjectCommand = vscode.commands.registerCommand('easycpp.createProject', () => {
-        if (!vscode.workspace.workspaceFolders) {
-            vscode.window.showErrorMessage("Open a folder or workspace before creating a project!");
-            return;
-        }
-        fetch(baseUrl + '/templates/files.json')
-            .then(res => res.json())
-            .then(data => {
-                let templates = [];
-                for (let tname in data.templates) { templates.push(tname); }
-
-                vscode.window.showQuickPick(templates)
-                .then(selected => selectFolderAndDownload(data, selected));
-            })
-            .catch(error => vscode.window.showErrorMessage("Easy C++ Projects error: Could not fetch 'files.json' from GitHub\nError: " + error));
-    });
+    let createProjectCommand = vscode.commands.registerCommand('easycpp.createProject', createProject);
+    let createClassCommand = vscode.commands.registerCommand('easycpp.createClass', createClass);
 
     context.subscriptions.push(createProjectCommand);
+    context.subscriptions.push(createClassCommand);
 }
 
 export function deactivate() {
 }
+
+const createClass = () => {
+    vscode.window.showInputBox({prompt: "Enter class name"})
+    .then(val => {
+        if (!val) { return; }
+
+        fetch(baseUrl + '/templates/class/easyclass.cpp')
+            .then(value => value.text())
+            .then(data => {
+                data = data.replace(new RegExp('easyclass', 'g'), val);
+                writeFileSync(vscode.workspace.rootPath + '/src/' + val + '.cpp', data);
+            })
+            .then(() => {
+                fetch(baseUrl + '/templates/class/easyclass.hpp')
+                    .then(value => value.text())
+                    .then(data => {
+                        data = data.replace(new RegExp('easyclass', 'g'), val);
+                        writeFileSync(vscode.workspace.rootPath + '/include/' + val + '.hpp', data);
+                    })
+                    .catch(error => vscode.window.showErrorMessage(`Easy C++ Error: ${error}`));
+            })
+            .catch(error => vscode.window.showErrorMessage(`Easy C++ Error: ${error}`));
+    });
+};
+
+const createProject = () => {
+    if (!vscode.workspace.workspaceFolders) {
+        vscode.window.showErrorMessage("Open a folder or workspace before creating a project!");
+        return;
+    }
+    fetch(baseUrl + '/templates/files.json')
+        .then(res => res.json())
+        .then(data => {
+            let templates = [];
+            for (let tname in data.templates) { templates.push(tname); }
+
+            vscode.window.showQuickPick(templates)
+            .then(selected => selectFolderAndDownload(data, selected));
+        })
+        .catch(error => vscode.window.showErrorMessage("Easy C++ Projects error: Could not fetch 'files.json' from GitHub\nError: " + error));
+};
 
 function selectFolderAndDownload(files: EasyFilesJSON, templateName: string | undefined): void {
     if (!templateName || !vscode.workspace.workspaceFolders) { return; }
