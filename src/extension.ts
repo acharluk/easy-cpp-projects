@@ -51,7 +51,7 @@ const createProject = () => {
         vscode.window.showErrorMessage("Open a folder or workspace before creating a project!");
         return;
     }
-    fetch(baseUrl + '/templates/files.json')
+    fetch(baseUrl + '/templates/project/files.json')
         .then(res => res.json())
         .then(data => {
             let templates = [];
@@ -86,7 +86,7 @@ function downloadTemplate(files: EasyFilesJSON, templateName: string, folder: st
     });
 
     for (let file in files.templates[templateName]) {
-        fetch(baseUrl + '/templates/' + "/" + file)
+        fetch(baseUrl + '/templates/project/' + file)
         .then(res => res.text())
         .then(data => {
             writeFileSync(folder + '/' + files.templates[templateName][file], data);
