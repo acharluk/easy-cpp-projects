@@ -36,27 +36,17 @@ export function deactivate() {
 }
 
 function selectFolderAndDownload(files: EasyFilesJSON, templateName: string | undefined): void {
-    let folders = vscode.workspace.workspaceFolders;
-    if (!templateName || !folders) { return; }
+    if (!templateName || !vscode.workspace.workspaceFolders) { return; }
     
-    if (folders.length > 1) {
-        let foldernames: vscode.QuickPickItem[] = [];
-        if (folders) {
-            folders.forEach(e => {
-                foldernames.push({ label: e.uri.fsPath, description: "", detail: undefined});
-            });
-        } else {
-            return;
-        }
-        
-        vscode.window.showQuickPick(foldernames)
+    if (vscode.workspace.workspaceFolders.length > 1) {
+        vscode.window.showWorkspaceFolderPick()
         .then(chosen => {
             if (!chosen) { return; }
-            let folder = chosen.label;
-            downloadTemplate(files, templateName, folder);
+            let folder = chosen.uri;
+            downloadTemplate(files, templateName, folder.fsPath);
         });
     } else {
-        downloadTemplate(files, templateName, folders[0].uri.fsPath);
+        downloadTemplate(files, templateName, vscode.workspace.workspaceFolders[0].uri.fsPath);
     }
 }
 
