@@ -28,9 +28,9 @@ Easy C++ projects will create the following:
 
 ## Release Notes
 
-### 1.2.0
+### 1.2.1
 
-Add support for multi-root workspaces
+Use VSCode's `showWorkspaceFolderPick` function for folder picking
 
 
 [version-badge]: https://vsmarketplacebadge.apphb.com/version/ACharLuk.easy-cpp-projects.svg
