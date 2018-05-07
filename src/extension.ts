@@ -23,27 +23,44 @@ export function deactivate() {
 }
 
 const createClass = () => {
-    vscode.window.showInputBox({prompt: "Enter class name"})
-    .then(val => {
-        if (!val) { return; }
+    fetch(baseUrl + '/templates/classes/files.json')
+    .then(data => data.json())
+    .then(templates => {
+        vscode.window.showQuickPick(templates)
+        .then(selected => {
+            if (!selected) { return; }
 
-        fetch(baseUrl + '/templates/class/easyclass.cpp')
-            .then(value => value.text())
-            .then(data => {
-                data = data.replace(new RegExp('easyclass', 'g'), val);
-                writeFileSync(vscode.workspace.rootPath + '/src/' + val + '.cpp', data);
-            })
-            .then(() => {
-                fetch(baseUrl + '/templates/class/easyclass.hpp')
-                    .then(value => value.text())
-                    .then(data => {
-                        data = data.replace(new RegExp('easyclass', 'g'), val);
-                        writeFileSync(vscode.workspace.rootPath + '/include/' + val + '.hpp', data);
-                    })
-                    .catch(error => vscode.window.showErrorMessage(`Easy C++ Error: ${error}`));
-            })
-            .catch(error => vscode.window.showErrorMessage(`Easy C++ Error: ${error}`));
-    });
+            vscode.window.showInputBox({prompt: "Enter class name"})
+            .then(val => {
+                if (!val || !vscode.window.activeTextEditor) { return; }
+                let currentFolderWorkspace = vscode.workspace.getWorkspaceFolder(vscode.window.activeTextEditor.document.uri);
+                if (!currentFolderWorkspace) { return; }
+                
+                const currentFolder = currentFolderWorkspace.uri.fsPath;
+
+                fetch(`${baseUrl}/templates/classes/${selected}/easyclass.cpp`)
+                .then(value => value.text())
+                .then(data => {
+                    data = data.replace(new RegExp('easyclass', 'g'), val);
+                    writeFileSync(`${currentFolder}/src/${val}.cpp`, data);
+                })
+                .catch(error => vscode.window.showErrorMessage(`Easy C++ Error: ${error}`));
+                
+                fetch(`${baseUrl}/templates/classes/${selected}/easyclass.hpp`)
+                .then(value => value.text())
+                .then(data => {
+                    data = data.replace(new RegExp('easyclass', 'g'), val);
+                    writeFileSync(`${currentFolder}/include/${val}.hpp`, data);
+                })
+                .then(() => {
+                    vscode.workspace.openTextDocument(`${currentFolder}/include/${val}.hpp`)
+                    .then(doc => vscode.window.showTextDocument(doc));
+                })
+                .catch(error => vscode.window.showErrorMessage(`Easy C++ Error: ${error}`));
+            });
+        });
+    })
+    .catch(error => vscode.window.showErrorMessage(`Easy C++ error: ${error}`));
 };
 
 const createProject = () => {
@@ -52,15 +69,15 @@ const createProject = () => {
         return;
     }
     fetch(baseUrl + '/templates/project/files.json')
-        .then(res => res.json())
-        .then(data => {
-            let templates = [];
-            for (let tname in data.templates) { templates.push(tname); }
+    .then(res => res.json())
+    .then(data => {
+        let templates = [];
+        for (let tname in data.templates) { templates.push(tname); }
 
-            vscode.window.showQuickPick(templates)
-            .then(selected => selectFolderAndDownload(data, selected));
-        })
-        .catch(error => vscode.window.showErrorMessage("Easy C++ Projects error: Could not fetch 'files.json' from GitHub\nError: " + error));
+        vscode.window.showQuickPick(templates)
+        .then(selected => selectFolderAndDownload(data, selected));
+    })
+    .catch(error => vscode.window.showErrorMessage("Easy C++ Projects error: Could not fetch 'files.json' from GitHub\nError: " + error));
 };
 
 function selectFolderAndDownload(files: EasyFilesJSON, templateName: string | undefined): void {
