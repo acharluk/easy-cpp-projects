@@ -1,0 +1,27 @@
+{
+    "directories":[
+        ".vscode",
+        "bin",
+        "include",
+        "lib",
+        "src"
+    ],
+    "templates":{
+        "Empty":{
+            "shared/Makefile":"Makefile",
+            "shared/tasks.json":".vscode/tasks.json",
+            "empty/main.cpp": "src/main.cpp"
+        },
+        "Hello world":{
+            "shared/Makefile":"Makefile",
+            "shared/tasks.json":".vscode/tasks.json",
+            "hello-world/main.cpp": "src/main.cpp"
+        },
+        "WSL (Windows Subsystem for Linux)":{
+            "shared/Makefile":"Makefile",
+            "wsl/tasks.json":".vscode/tasks.json",
+            "hello-world/main.cpp": "src/main.cpp"
+        }
+    }
+    
+}
