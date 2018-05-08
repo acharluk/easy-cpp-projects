@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.3.0
+
+Class creation using templates!
+
 ## 1.2.1
 
 Use VSCode's `showWorkspaceFolderPick` function for folder picking

@@ -35,7 +35,7 @@ const createClass = () => {
                 if (!val || !vscode.window.activeTextEditor) { return; }
                 let currentFolderWorkspace = vscode.workspace.getWorkspaceFolder(vscode.window.activeTextEditor.document.uri);
                 if (!currentFolderWorkspace) { return; }
-                
+
                 const currentFolder = currentFolderWorkspace.uri.fsPath;
 
                 fetch(`${baseUrl}/templates/classes/${selected}/easyclass.cpp`)

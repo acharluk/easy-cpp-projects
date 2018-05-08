@@ -2,12 +2,15 @@
 [![Installs][installs-badge]][marketplace]
 ## Features
 
-Create C++ projects with just one click.
+Create C++ projects and classes with just few clicks.
 
-Easy C++ projects will create the following:
-- Project structure: Common folders like src, include and bin
-- Makefile: A makefile already set up to build and run your project
-- VSCode task: Configurations for building and running your project
++ Creating a new Easy C++ project will do the following:
+  - Project structure: Common folders like src, include and bin
+  - Makefile: A makefile already set up to build and run your project
+  - VSCode task: Configurations for building and running your project
+
++ Creating a Easy C++ class will create the .cpp and .hpp using one of the templates avaliable [here](https://github.com/acharluk/easy-cpp-projects/tree/master/templates/classes)
+
 
 ## Requirements
 
@@ -22,15 +25,12 @@ Easy C++ projects will create the following:
     - macOS: Check out [Brew](https://brew.sh/)
 - You should install C/C++ extension for the best experience
 
-## Extension Settings
-
-## Known Issues
 
 ## Release Notes
 
-### 1.2.1
+### 1.3.0
 
-Use VSCode's `showWorkspaceFolderPick` function for folder picking
+Class creation using templates!
 
 
 [version-badge]: https://vsmarketplacebadge.apphb.com/version/ACharLuk.easy-cpp-projects.svg
