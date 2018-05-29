@@ -76,7 +76,10 @@ const createProject = () => {
         for (let tname in data.templates) { templates.push(tname); }
 
         vscode.window.showQuickPick(templates)
-        .then(selected => selectFolderAndDownload(data, selected));
+        .then(selected => selectFolderAndDownload(data, selected))
+        .then(() => {
+            vscode.workspace.getConfiguration('files').update('associations', { "*.tpp":"cpp" }, vscode.ConfigurationTarget.Workspace);
+        });
     })
     .catch(error => vscode.window.showErrorMessage("Easy C++ Projects error: Could not fetch 'files.json' from GitHub\nError: " + error));
 };
