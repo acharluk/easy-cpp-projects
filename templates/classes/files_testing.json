@@ -34,7 +34,7 @@
             "folder":"include",
             "extension":"hpp"
         },
-        "easyclass.cpp":{
+        "easyclass.tpp":{
             "folder":"src",
             "extension":"tpp"
         }
