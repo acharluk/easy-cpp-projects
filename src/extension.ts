@@ -6,9 +6,18 @@ import fetch from 'node-fetch';
 
 const baseUrl = 'https://raw.githubusercontent.com/acharluk/easy-cpp-projects/master';
 
-interface EasyFilesJSON {
+interface EasyProjectsJSON {
     directories: string[];
     templates: { [name: string]: { [from: string]: string } };
+}
+
+interface EasyClassesJSON {
+    [className: string]: {
+        [fileName: string]: {
+            folder: string;
+            extension: string;
+        }
+    }
 }
 
 export function activate(context: vscode.ExtensionContext) {
@@ -23,11 +32,14 @@ export function deactivate() {
 }
 
 const createClass = () => {
-    fetch(baseUrl + '/templates/classes/files.json')
+    fetch(baseUrl + '/templates/classes/files_testing.json')
     .then(data => data.json())
-    .then(templates => {
-        vscode.window.showQuickPick(templates)
-        .then(selected => {
+    .then((templates: EasyClassesJSON) => {
+        let template_files = [];
+        for (let tname in templates) { template_files.push(tname); }
+
+        vscode.window.showQuickPick(template_files)
+        .then((selected: string | undefined) => {
             if (!selected) { return; }
 
             vscode.window.showInputBox({prompt: "Enter class name"})
@@ -37,26 +49,15 @@ const createClass = () => {
                 if (!currentFolderWorkspace) { return; }
 
                 const currentFolder = currentFolderWorkspace.uri.fsPath;
-
-                fetch(`${baseUrl}/templates/classes/${selected}/easyclass.cpp`)
-                .then(value => value.text())
-                .then(data => {
-                    data = data.replace(new RegExp('easyclass', 'g'), val);
-                    writeFileSync(`${currentFolder}/src/${val}.cpp`, data);
-                })
-                .catch(error => vscode.window.showErrorMessage(`Easy C++ Error: ${error}`));
-                
-                fetch(`${baseUrl}/templates/classes/${selected}/easyclass.hpp`)
-                .then(value => value.text())
-                .then(data => {
-                    data = data.replace(new RegExp('easyclass', 'g'), val);
-                    writeFileSync(`${currentFolder}/include/${val}.hpp`, data);
-                })
-                .then(() => {
-                    vscode.workspace.openTextDocument(`${currentFolder}/include/${val}.hpp`)
-                    .then(doc => vscode.window.showTextDocument(doc));
-                })
-                .catch(error => vscode.window.showErrorMessage(`Easy C++ Error: ${error}`));
+                for (let file in templates[selected]) {
+                    fetch(`${baseUrl}/templates/classes/${selected}/${file}`)
+                    .then(value => value.text())
+                    .then(data => {
+                        data = data.replace(new RegExp('easyclass', 'g'), val);
+                        writeFileSync(`${currentFolder}/${templates[selected][file].folder}/${val}.${templates[selected][file].extension}`, data);
+                    })
+                    .catch(error => vscode.window.showErrorMessage(`Easy C++ Error: ${error}`));
+                }
             });
         });
     })
@@ -80,9 +81,9 @@ const createProject = () => {
     .catch(error => vscode.window.showErrorMessage("Easy C++ Projects error: Could not fetch 'files.json' from GitHub\nError: " + error));
 };
 
-function selectFolderAndDownload(files: EasyFilesJSON, templateName: string | undefined): void {
+function selectFolderAndDownload(files: EasyProjectsJSON, templateName: string | undefined): void {
     if (!templateName || !vscode.workspace.workspaceFolders) { return; }
-    
+
     if (vscode.workspace.workspaceFolders.length > 1) {
         vscode.window.showWorkspaceFolderPick()
         .then(chosen => {
@@ -95,7 +96,7 @@ function selectFolderAndDownload(files: EasyFilesJSON, templateName: string | un
     }
 }
 
-function downloadTemplate(files: EasyFilesJSON, templateName: string, folder: string): void {
+function downloadTemplate(files: EasyProjectsJSON, templateName: string, folder: string): void {
     files.directories.forEach((dir: string) => {
         if (!existsSync(folder + '/' + dir)) {
             mkdirSync(folder + '/' + dir);
