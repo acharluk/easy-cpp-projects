@@ -46,7 +46,7 @@ export function deactivate() {
 }
 
 const createClass = () => {
-    fetch(baseUrl + '/templates/classes/files_testing.json')
+    fetch(baseUrl + '/templates/classes/files.json')
     .then(data => data.json())
     .then((templates: EasyClassesJSON) => {
         let template_files = [];

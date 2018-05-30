@@ -2,7 +2,7 @@
     "name": "easy-cpp-projects",
     "displayName": "Easy C++ projects",
     "description": "Create C++ projects easily for GCC and WSL-GCC",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "publisher": "ACharLuk",
     "icon": "logo.png",
     "repository": {
@@ -31,7 +31,7 @@
                 "title": "Easy Cpp/C++: Create new class"
             }
         ],
-        "keybindings":[
+        "keybindings": [
             {
                 "command": "workbench.action.tasks.test",
                 "key": "f7"
@@ -55,7 +55,7 @@
         "@types/node-fetch": "^1.6.9",
         "tslint": "^5.10.0",
         "typescript": "^2.8.3",
-        "vscode": "^1.1.17"
+        "vscode": "^1.1.18"
     },
     "dependencies": {
         "node-fetch": "^2.1.2"

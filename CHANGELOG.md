@@ -1,5 +1,15 @@
 # Change Log
 
+## 1.4.0
+
+Added buttons to the status bar to `Build` and `Build & Run` your project
+
+Added Ctrl+F7 and F7 to `Build` and `Build & Run` your project
+
+Changed json format for classes to include compatibility for more than two files and other file extensions, used for templated class (.tpp)
+
+Added file association for .tpp files
+
 ## 1.3.0
 
 Class creation using templates!

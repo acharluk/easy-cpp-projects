@@ -7,9 +7,9 @@ Create C++ projects and classes with just few clicks.
 + Creating a new Easy C++ project will do the following:
   - Project structure: Common folders like src, include and bin
   - Makefile: A makefile already set up to build and run your project
-  - VSCode task: Configurations for building and running your project
+  - VSCode tasks: Configurations for building and running your project
 
-+ Creating a Easy C++ class will create the .cpp and .hpp using one of the templates avaliable [here](https://github.com/acharluk/easy-cpp-projects/tree/master/templates/classes)
++ Creating a Easy C++ class will create the appropiate files using one of the templates avaliable [here](https://github.com/acharluk/easy-cpp-projects/tree/master/templates/classes)
 
 
 ## Requirements
@@ -28,9 +28,15 @@ Create C++ projects and classes with just few clicks.
 
 ## Release Notes
 
-### 1.3.0
+### 1.4.0
 
-Class creation using templates!
+Added buttons to the status bar to `Build` and `Build & Run` your project
+
+Added Ctrl+F7 and F7 to `Build` and `Build & Run` your project
+
+Changed json format for classes to include compatibility for more than two files and other file extensions, used for templated class (.tpp)
+
+Added file association for .tpp files
 
 
 [version-badge]: https://vsmarketplacebadge.apphb.com/version/ACharLuk.easy-cpp-projects.svg
