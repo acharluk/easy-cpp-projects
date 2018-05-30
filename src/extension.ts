@@ -24,6 +24,20 @@ export function activate(context: vscode.ExtensionContext) {
     let createProjectCommand = vscode.commands.registerCommand('easycpp.createProject', createProject);
     let createClassCommand = vscode.commands.registerCommand('easycpp.createClass', createClass);
 
+    let buildButton = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 0);
+    buildButton.command = 'workbench.action.tasks.build';
+    buildButton.text = ' Build';
+    buildButton.tooltip = 'Build C++ Project (make) [Ctrl+F7]';
+    buildButton.show();
+
+    let buildAndRunButton = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 0);
+    buildAndRunButton.command = 'workbench.action.tasks.test';
+    buildAndRunButton.text = ' Build & Run';
+    buildAndRunButton.tooltip = 'Build & Run C++ Project (make run) [F7]';
+    buildAndRunButton.show();
+
+    context.subscriptions.push(buildButton);
+    context.subscriptions.push(buildAndRunButton);
     context.subscriptions.push(createProjectCommand);
     context.subscriptions.push(createClassCommand);
 }
