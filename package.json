@@ -16,7 +16,8 @@
     ],
     "activationEvents": [
         "onCommand:easycpp.createProject",
-        "onCommand:easycpp.createClass"
+        "onCommand:easycpp.createClass",
+        "workspaceContains:.vscode/tasks.json"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -28,6 +29,16 @@
             {
                 "command": "easycpp.createClass",
                 "title": "Easy Cpp/C++: Create new class"
+            }
+        ],
+        "keybindings":[
+            {
+                "command": "workbench.action.tasks.test",
+                "key": "f7"
+            },
+            {
+                "command": "workbench.action.tasks.build",
+                "key": "ctrl+f7"
             }
         ]
     },
