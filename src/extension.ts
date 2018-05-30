@@ -69,6 +69,9 @@ const createClass = () => {
                     .then(data => {
                         data = data.replace(new RegExp('easyclass', 'g'), val);
                         writeFileSync(`${currentFolder}/${templates[selected][file].folder}/${val}.${templates[selected][file].extension}`, data);
+
+                        vscode.workspace.openTextDocument(`${currentFolder}/${templates[selected][file].folder}/${val}.${templates[selected][file].extension}`)
+                        .then(doc => vscode.window.showTextDocument(doc));
                     })
                     .catch(error => vscode.window.showErrorMessage(`Easy C++ Error: ${error}`));
                 }
