@@ -7,21 +7,31 @@
         "src"
     ],
     "templates":{
-        "Empty":{
+        "[G++] Empty":{
             "shared/Makefile":"Makefile",
             "shared/tasks.json":".vscode/tasks.json",
             "empty/main.cpp": "src/main.cpp"
         },
-        "Hello world":{
+        "[G++] Hello world":{
             "shared/Makefile":"Makefile",
             "shared/tasks.json":".vscode/tasks.json",
             "hello-world/main.cpp": "src/main.cpp"
         },
-        "WSL (Windows Subsystem for Linux)":{
+        "[WSL] (Windows Subsystem for Linux) Hello world":{
             "shared/Makefile":"Makefile",
             "wsl/tasks.json":".vscode/tasks.json",
             "hello-world/main.cpp": "src/main.cpp"
+        },
+        "[MSVC] (Windows x64, Visual Studio Build Tools 2017) Hello world":{
+            "msvc/build_x64.bat":"build.bat",
+            "msvc/tasks.json":".vscode/tasks.json",
+            "hello-world/main.cpp": "src/main.cpp"
+        },
+        "[MSVC] (Windows x86, Visual Studio Build Tools 2017) Hello world":{
+            "msvc/build_x86.bat":"build.bat",
+            "msvc/tasks.json":".vscode/tasks.json",
+            "hello-world/main.cpp": "src/main.cpp"
         }
     }
-    
+
 }
