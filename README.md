@@ -28,6 +28,10 @@ Create C++ projects and classes with just few clicks.
 
 ## Release Notes
 
+### 1.4.1
+
+Fixed button icons not working
+
 ### 1.4.0
 
 Added buttons to the status bar to `Build` and `Build & Run` your project
