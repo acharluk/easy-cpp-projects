@@ -45,94 +45,93 @@ export function activate(context: vscode.ExtensionContext) {
 export function deactivate() {
 }
 
-const createClass = () => {
-    fetch(baseUrl + '/templates/classes/files.json')
-    .then(data => data.json())
-    .then((templates: EasyClassesJSON) => {
-        let template_files = [];
+const createClass = async () => {
+    try {
+        const  data = await fetch(`${baseUrl}/templates/classes/files.json`);
+        const templates: EasyClassesJSON = await data.json();
+        const template_files = [];
         for (let tname in templates) { template_files.push(tname); }
 
-        vscode.window.showQuickPick(template_files)
-        .then((selected: string | undefined) => {
-            if (!selected) { return; }
+        const selected = await vscode.window.showQuickPick(template_files);
+        if (!selected) { return; }
 
-            vscode.window.showInputBox({prompt: "Enter class name"})
-            .then(val => {
-                if (!val || !vscode.window.activeTextEditor) { return; }
-                let currentFolderWorkspace = vscode.workspace.getWorkspaceFolder(vscode.window.activeTextEditor.document.uri);
-                if (!currentFolderWorkspace) { return; }
+        const val = await vscode.window.showInputBox({ prompt: `Enter class name` });
+        if (!val || ! vscode.window.activeTextEditor) { return; }
 
-                const currentFolder = currentFolderWorkspace.uri.fsPath;
-                for (let file in templates[selected]) {
-                    fetch(`${baseUrl}/templates/classes/${selected}/${file}`)
-                    .then(value => value.text())
-                    .then(data => {
-                        data = data.replace(new RegExp('easyclass', 'g'), val);
-                        writeFileSync(`${currentFolder}/${templates[selected][file].folder}/${val}.${templates[selected][file].extension}`, data);
+        const currentFolderWorkspace = vscode.workspace.getWorkspaceFolder(vscode.window.activeTextEditor.document.uri);
+        if (!currentFolderWorkspace) { return; }
 
-                        vscode.workspace.openTextDocument(`${currentFolder}/${templates[selected][file].folder}/${val}.${templates[selected][file].extension}`)
-                        .then(doc => vscode.window.showTextDocument(doc));
-                    })
-                    .catch(error => vscode.window.showErrorMessage(`Easy C++ Error: ${error}`));
-                }
-            });
-        });
-    })
-    .catch(error => vscode.window.showErrorMessage(`Easy C++ error: ${error}`));
+        const currentFolder = currentFolderWorkspace.uri.fsPath;
+        for (let file in templates[selected]) {
+            const value = await fetch(`${baseUrl}/templates/classes/${selected}/${file}`);
+            let data = await value.text();
+            data = data.replace(new RegExp('easyclass', 'g'), val);
+            writeFileSync(`${currentFolder}/${templates[selected][file].folder}/${val}.${templates[selected][file].extension}`, data);
+
+            vscode.workspace.openTextDocument(`${currentFolder}/${templates[selected][file].folder}/${val}.${templates[selected][file].extension}`)
+            .then(doc => vscode.window.showTextDocument(doc));
+        }
+    } catch(err) {
+        vscode.window.showErrorMessage(`Easy C++ error: ${err}`);
+    }
 };
 
-const createProject = () => {
+const createProject = async () => {
     if (!vscode.workspace.workspaceFolders) {
         vscode.window.showErrorMessage("Open a folder or workspace before creating a project!");
         return;
     }
-    fetch(baseUrl + '/templates/project/files.json')
-    .then(res => res.json())
-    .then(data => {
+
+    try {
+        const res = await fetch(`${baseUrl}/templates/project/files.json`);
+        const  data = await res.json();
         let templates = [];
         for (let tname in data.templates) { templates.push(tname); }
 
-        vscode.window.showQuickPick(templates)
-        .then(selected => selectFolderAndDownload(data, selected))
-        .then(() => {
-            vscode.workspace.getConfiguration('files').update('associations', { "*.tpp":"cpp" }, vscode.ConfigurationTarget.Workspace);
-        });
-    })
-    .catch(error => vscode.window.showErrorMessage("Easy C++ Projects error: Could not fetch 'files.json' from GitHub\nError: " + error));
+        const selected = await vscode.window.showQuickPick(templates)
+        await selectFolderAndDownload(data, selected)
+        vscode.workspace.getConfiguration('files').update('associations', { "*.tpp":"cpp" }, vscode.ConfigurationTarget.Workspace);
+    } catch(error) {
+         vscode.window.showErrorMessage(`Easy C++ Projects error: Could not fetch 'files.json' from GitHub\nError: ${error}`);
+    }
 };
 
-function selectFolderAndDownload(files: EasyProjectsJSON, templateName: string | undefined): void {
+const selectFolderAndDownload = async (files: EasyProjectsJSON, templateName: string | undefined) => {
     if (!templateName || !vscode.workspace.workspaceFolders) { return; }
 
     if (vscode.workspace.workspaceFolders.length > 1) {
-        vscode.window.showWorkspaceFolderPick()
-        .then(chosen => {
+        try {
+            const chosen = await vscode.window.showWorkspaceFolderPick();
             if (!chosen) { return; }
             let folder = chosen.uri;
-            downloadTemplate(files, templateName, folder.fsPath);
-        });
+            await downloadTemplate(files, templateName, folder.fsPath);
+        } catch(err) {
+            vscode.window.showErrorMessage(`Easy C++ error: ${err}`);
+        }
+
     } else {
         downloadTemplate(files, templateName, vscode.workspace.workspaceFolders[0].uri.fsPath);
     }
 }
 
-function downloadTemplate(files: EasyProjectsJSON, templateName: string, folder: string): void {
+const downloadTemplate = async (files: EasyProjectsJSON, templateName: string, folder: string) => {
     files.directories.forEach((dir: string) => {
-        if (!existsSync(folder + '/' + dir)) {
-            mkdirSync(folder + '/' + dir);
+        if (!existsSync(`${folder}/${dir}`)) {
+            mkdirSync(`${folder}/${dir}`);
         }
     });
 
     for (let file in files.templates[templateName]) {
-        fetch(baseUrl + '/templates/project/' + file)
-        .then(res => res.text())
-        .then(data => {
-            writeFileSync(folder + '/' + files.templates[templateName][file], data);
+        try {
+            const res = await fetch(`${baseUrl}/templates/project/${file}`);
+            const data = await res.text();
+            writeFileSync(`${folder}/${files.templates[templateName][file]}`, data);
             if (files.templates[templateName][file] === 'src/main.cpp') {
-                vscode.workspace.openTextDocument(folder + '/src/main.cpp')
+                vscode.workspace.openTextDocument(`${folder}/src/main.cpp`)
                 .then(doc => vscode.window.showTextDocument(doc));
             }
-        })
-        .catch(error => vscode.window.showErrorMessage(`Easy C++ Projects error: Could not download '${file}' from GitHub\nError: ` + error));
+        } catch(error) {
+             vscode.window.showErrorMessage(`Easy C++ Projects error: Could not download '${file}' from GitHub\nError: ${error}`);
+        }
     }
 }
