@@ -7,27 +7,27 @@
         "src"
     ],
     "templates":{
-        "[G++] Empty":{
-            "shared/Makefile":"Makefile",
-            "shared/tasks.json":".vscode/tasks.json",
-            "empty/main.cpp": "src/main.cpp"
-        },
-        "[G++] Hello world":{
+        "[G++] Linux":{
             "shared/Makefile":"Makefile",
             "shared/tasks.json":".vscode/tasks.json",
             "hello-world/main.cpp": "src/main.cpp"
         },
-        "[WSL] (Windows Subsystem for Linux) Hello world":{
+        "[Clang++] macOS":{
+            "clang/Makefile":"Makefile",
+            "shared/tasks.json":".vscode/tasks.json",
+            "hello-world/main.cpp": "src/main.cpp"
+        },
+        "[WSL] Windows Subsystem for Linux":{
             "shared/Makefile":"Makefile",
             "wsl/tasks.json":".vscode/tasks.json",
             "hello-world/main.cpp": "src/main.cpp"
         },
-        "[MSVC] (Windows x64, Visual Studio Build Tools 2017) Hello world":{
+        "[MSVC] Windows x64, Visual Studio Build Tools 2017":{
             "msvc/build_x64.bat":"build.bat",
             "msvc/tasks.json":".vscode/tasks.json",
             "hello-world/main.cpp": "src/main.cpp"
         },
-        "[MSVC] (Windows x86, Visual Studio Build Tools 2017) Hello world":{
+        "[MSVC] Windows x86, Visual Studio Build Tools 2017":{
             "msvc/build_x86.bat":"build.bat",
             "msvc/tasks.json":".vscode/tasks.json",
             "hello-world/main.cpp": "src/main.cpp"
