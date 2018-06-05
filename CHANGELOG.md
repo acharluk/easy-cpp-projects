@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.4.2
+
+Redone readme to add MSVC and Clang explanations
+
 ## 1.4.1
 
 Fixed button icons not working
