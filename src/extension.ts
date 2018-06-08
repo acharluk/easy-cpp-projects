@@ -17,7 +17,7 @@ interface EasyClassesJSON {
             folder: string;
             extension: string;
         }
-    }
+    };
 }
 
 export function activate(context: vscode.ExtensionContext) {
@@ -88,8 +88,8 @@ const createProject = async () => {
         let templates = [];
         for (let tname in data.templates) { templates.push(tname); }
 
-        const selected = await vscode.window.showQuickPick(templates)
-        await selectFolderAndDownload(data, selected)
+        const selected = await vscode.window.showQuickPick(templates);
+        await selectFolderAndDownload(data, selected);
         vscode.workspace.getConfiguration('files').update('associations', { "*.tpp":"cpp" }, vscode.ConfigurationTarget.Workspace);
     } catch(error) {
          vscode.window.showErrorMessage(`Easy C++ Projects error: Could not fetch 'files.json' from GitHub\nError: ${error}`);
@@ -112,7 +112,7 @@ const selectFolderAndDownload = async (files: EasyProjectsJSON, templateName: st
     } else {
         downloadTemplate(files, templateName, vscode.workspace.workspaceFolders[0].uri.fsPath);
     }
-}
+};
 
 const downloadTemplate = async (files: EasyProjectsJSON, templateName: string, folder: string) => {
     files.directories.forEach((dir: string) => {
@@ -134,4 +134,4 @@ const downloadTemplate = async (files: EasyProjectsJSON, templateName: string, f
              vscode.window.showErrorMessage(`Easy C++ Projects error: Could not download '${file}' from GitHub\nError: ${error}`);
         }
     }
-}
+};
