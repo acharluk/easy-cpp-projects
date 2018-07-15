@@ -1,12 +1,12 @@
 {
     "constructor":{
-        "easyclass.hpp":{
-            "folder":"include",
-            "extension":"hpp"
-        },
         "easyclass.cpp":{
             "folder":"src",
             "extension":"cpp"
+        },
+        "easyclass.hpp":{
+            "folder":"include",
+            "extension":"hpp"
         }
     },
     "empty":{
