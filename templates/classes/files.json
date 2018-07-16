@@ -10,33 +10,33 @@
         }
     },
     "empty":{
-        "easyclass.hpp":{
-            "folder":"include",
-            "extension":"hpp"
-        },
         "easyclass.cpp":{
             "folder":"src",
             "extension":"cpp"
+        },
+        "easyclass.hpp":{
+            "folder":"include",
+            "extension":"hpp"
         }
     },
     "singleton":{
-        "easyclass.hpp":{
-            "folder":"include",
-            "extension":"hpp"
-        },
         "easyclass.cpp":{
             "folder":"src",
             "extension":"cpp"
-        }
-    },
-    "template":{
+        },
         "easyclass.hpp":{
             "folder":"include",
             "extension":"hpp"
-        },
+        }
+    },
+    "template":{
         "easyclass.tpp":{
             "folder":"src",
             "extension":"tpp"
+        },
+        "easyclass.hpp":{
+            "folder":"include",
+            "extension":"hpp"
         }
     }
 }
