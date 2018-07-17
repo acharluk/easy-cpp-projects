@@ -10,7 +10,8 @@
         "[G++] Linux":{
             "shared/Makefile":"Makefile",
             "shared/tasks.json":".vscode/tasks.json",
-            "hello-world/main.cpp": "src/main.cpp"
+            "hello-world/main.cpp": "src/main.cpp",
+            "gcc/launch.json":".vscode/launch.json"
         },
         "[Clang++] macOS":{
             "clang/Makefile":"Makefile",
@@ -25,12 +26,14 @@
         "[MSVC] Windows x64, Visual Studio Build Tools 2017":{
             "msvc/build_x64.bat":"build.bat",
             "msvc/tasks.json":".vscode/tasks.json",
-            "hello-world/main.cpp": "src/main.cpp"
+            "hello-world/main.cpp": "src/main.cpp",
+            "msvc/launch.json":".vscode/launch.json"
         },
         "[MSVC] Windows x86, Visual Studio Build Tools 2017":{
             "msvc/build_x86.bat":"build.bat",
             "msvc/tasks.json":".vscode/tasks.json",
-            "hello-world/main.cpp": "src/main.cpp"
+            "hello-world/main.cpp": "src/main.cpp",
+            "msvc/launch.json":".vscode/launch.json"
         }
     }
 

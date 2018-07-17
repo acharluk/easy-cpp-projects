@@ -45,23 +45,13 @@
 
 ## Release Notes
 
-### 1.4.2
+### 1.5.0
 
-Redone readme to add MSVC and Clang explanations
+Added configuration to force use of cmd.exe in Windows instead of PowerShell
 
-### 1.4.1
+Open both files when creating a class, avoid previewing only
 
-Fixed button icons not working
-
-### 1.4.0
-
-Added buttons to the status bar to `Build` and `Build & Run` your project
-
-Added Ctrl+F7 and F7 to `Build` and `Build & Run` your project
-
-Changed json format for classes to include compatibility for more than two files and other file extensions, used for templated class (.tpp)
-
-Added file association for .tpp files
+Added debugging configurations for GDB and Visual Studio Debugger
 
 [version-badge]: https://vsmarketplacebadge.apphb.com/version/ACharLuk.easy-cpp-projects.svg
 [installs-badge]: https://vsmarketplacebadge.apphb.com/installs/ACharLuk.easy-cpp-projects.svg

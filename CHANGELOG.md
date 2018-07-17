@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.5.0
+
+Added configuration to force use of cmd.exe in Windows instead of PowerShell
+
+Open both files when creating a class, avoid previewing only
+
+Added debugging configurations for GDB and Visual Studio Debugger
+
 ## 1.4.2
 
 Redone readme to add MSVC and Clang explanations

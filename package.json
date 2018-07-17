@@ -2,14 +2,14 @@
     "name": "easy-cpp-projects",
     "displayName": "Easy C++ projects",
     "description": "Create C++ projects easily for GCC and WSL-GCC",
-    "version": "1.4.2",
+    "version": "1.5.0",
     "publisher": "ACharLuk",
     "icon": "logo.png",
     "repository": {
         "url": "https://github.com/acharluk/easy-cpp-projects"
     },
     "engines": {
-        "vscode": "^1.20.0"
+        "vscode": "^1.22.0"
     },
     "categories": [
         "Other"
@@ -50,11 +50,11 @@
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "@types/mocha": "^2.2.42",
-        "@types/node": "^7.0.43",
-        "@types/node-fetch": "^1.6.9",
-        "tslint": "^5.10.0",
-        "typescript": "^2.8.3",
+        "@types/mocha": "^5.2.5",
+        "@types/node": "^10.5.2",
+        "@types/node-fetch": "^2.1.1",
+        "tslint": "^5.11.0",
+        "typescript": "^2.9.2",
         "vscode": "^1.1.18"
     },
     "dependencies": {
