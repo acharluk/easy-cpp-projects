@@ -69,7 +69,7 @@ const createClass = async () => {
             writeFileSync(`${currentFolder}/${templates[selected][file].folder}/${val}.${templates[selected][file].extension}`, data);
 
             vscode.workspace.openTextDocument(`${currentFolder}/${templates[selected][file].folder}/${val}.${templates[selected][file].extension}`)
-            .then(doc => vscode.window.showTextDocument(doc));
+            .then(doc => vscode.window.showTextDocument(doc, { preview: false }));
         }
     } catch(err) {
         vscode.window.showErrorMessage(`Easy C++ error: ${err}`);
@@ -128,7 +128,7 @@ const downloadTemplate = async (files: EasyProjectsJSON, templateName: string, f
             writeFileSync(`${folder}/${files.templates[templateName][file]}`, data);
             if (files.templates[templateName][file] === 'src/main.cpp') {
                 vscode.workspace.openTextDocument(`${folder}/src/main.cpp`)
-                .then(doc => vscode.window.showTextDocument(doc));
+                .then(doc => vscode.window.showTextDocument(doc, { preview: false }));
             }
         } catch(error) {
              vscode.window.showErrorMessage(`Easy C++ Projects error: Could not download '${file}' from GitHub\nError: ${error}`);

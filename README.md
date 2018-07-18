@@ -45,6 +45,10 @@
 
 ## Release Notes
 
+## 1.5.1
+
+Fix files opening only in preview
+
 ### 1.5.0
 
 Added configuration to force use of cmd.exe in Windows instead of PowerShell
