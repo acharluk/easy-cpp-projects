@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.5.2
+
+Fix Windows using PowerShell
+
 ## 1.5.1
 
 Fix files opening only in preview
