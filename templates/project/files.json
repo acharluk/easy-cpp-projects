@@ -7,16 +7,17 @@
         "src"
     ],
     "templates":{
-        "[G++] Linux":{
+        "[G++/GDB] Linux":{
             "shared/Makefile":"Makefile",
             "shared/tasks.json":".vscode/tasks.json",
             "hello-world/main.cpp": "src/main.cpp",
             "gcc/launch.json":".vscode/launch.json"
         },
-        "[Clang++] macOS":{
+        "[Clang++/LLDB] macOS":{
             "clang/Makefile":"Makefile",
             "shared/tasks.json":".vscode/tasks.json",
-            "hello-world/main.cpp": "src/main.cpp"
+            "hello-world/main.cpp": "src/main.cpp",
+            "clang/launch.json":".vscode/launch.json"
         },
         "[WSL] Windows Subsystem for Linux":{
             "shared/Makefile":"Makefile",
