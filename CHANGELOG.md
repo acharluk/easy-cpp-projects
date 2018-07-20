@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.5.3
+
+Updated readme
+
 ## 1.5.2
 
 Fix Windows using PowerShell

@@ -2,14 +2,27 @@
 [![Installs][installs-badge]][marketplace]
 ## Features
 
-### Create C++ projects and classes with just few clicks.
+### Create C++ projects and classes with just few clicks, for MSVC, GCC and Clang
+
+### It works with MSVC (Windows), GCC (Linux) and Clang (macOS)
 
 ### Creating a new project will do the following:
   - Project structure: Common folders like src, include and bin
   - Makefile: A makefile already set up to build and run your project
   - VSCode tasks: Configurations for building and running your project
+  - VSCode debug configuration: Debugging already setup for Visual Studio Debugger, GDB and LLDB
+  - Add new classes easily with the `Create new class` command
 
 ### Creating class will create the appropiate files using one of the templates avaliable [here](https://github.com/acharluk/easy-cpp-projects/tree/master/templates/classes)
+
+---
+
+## Getting started
+
+1. Install the compiler you want to use, look the _Requirements_ section below
+2. Open a new folder in VSCode
+3. Open the command palette (F1) and search for `easy cpp`, then press the `Create new C++ project` option
+4. Enjoy programming! Now you can compile your code using the `Build & Run` button in the status bar at the bottom or F7, you can also set breakpoints and use the debugger!
 
 ---
 
@@ -24,10 +37,10 @@
 
 ### GNU/Linux
 
-- Install GCC and Make using the package manager of your distribution, these are some of them:
-    + Debian/Ubuntu/Mint: `sudo apt install g++ make`
-    + Fedora: `sudo dnf install gcc-c++ make`
-    + Arch Linux: `sudo pacman -S gcc make`
+- Install GCC, Make and GDB using the package manager of your distribution, these are some of them:
+    + Debian/Ubuntu/Mint: `sudo apt install g++ make gdb`
+    + Fedora: `sudo dnf install gcc-c++ make gdb`
+    + Arch Linux: `sudo pacman -S gcc make gdb`
 
 ### MacOS
 
@@ -44,6 +57,10 @@
 ---
 
 ## Release Notes
+
+### 1.5.3
+
+Updated readme
 
 ### 1.5.2
 
