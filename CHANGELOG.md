@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.6.0
+
+Added `Create getter`, `Create setter` and `Create getter and setter` commands. This is in very early stages, so bugs will happen. Please report any bugs to the issues page on GitHub :)
+
 ## 1.5.3
 
 Updated readme

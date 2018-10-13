@@ -7,11 +7,11 @@
 ### It works with MSVC (Windows), GCC (Linux) and Clang (macOS)
 
 ### Creating a new project will do the following:
-  - Project structure: Common folders like src, include and bin
-  - Makefile: A makefile already set up to build and run your project
-  - VSCode tasks: Configurations for building and running your project
-  - VSCode debug configuration: Debugging already setup for Visual Studio Debugger, GDB and LLDB
-  - Add new classes easily with the `Create new class` command
+    - Project structure: Common folders like src, include and bin
+    - Makefile: A makefile already set up to build and run your project
+    - VSCode tasks: Configurations for building and running your project
+    - VSCode debug configuration: Debugging already setup for Visual Studio Debugger, GDB and LLDB
+    - Add new classes easily with the `Create new class` command
 
 ### Creating class will create the appropiate files using one of the templates avaliable [here](https://github.com/acharluk/easy-cpp-projects/tree/master/templates/classes)
 
@@ -57,6 +57,10 @@
 ---
 
 ## Release Notes
+
+### 1.6.0
+
+Added `Create getter`, `Create setter` and `Create getter and setter` commands. This is in very early stages, so bugs will happen. Please report any bugs to the issues page on GitHub :)
 
 ### 1.5.3
 
