@@ -2,7 +2,7 @@
     "name": "easy-cpp-projects",
     "displayName": "Easy C++ projects",
     "description": "Create C++ projects easily for GCC and WSL-GCC",
-    "version": "1.7.0",
+    "version": "1.7.1",
     "publisher": "ACharLuk",
     "icon": "logo.png",
     "repository": {
@@ -17,7 +17,8 @@
     "activationEvents": [
         "onCommand:easycpp.createProject",
         "onCommand:easycpp.createClass",
-        "workspaceContains:.vscode/tasks.json"
+        "onCommand:easycpp.openCustomDir",
+        "workspaceContains:.vscode/.easycpp"
     ],
     "main": "./out/extension",
     "contributes": {

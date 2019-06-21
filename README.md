@@ -58,29 +58,22 @@
 
 ## Release Notes
 
+### 1.7.1
+
+Load extension when the file .vscode/.easycpp is present, avoiding loading it when there is a tasks.json but it is not an Easy C++ project
+
+### 1.7.0
+
+Added support for offline templates if there is no Internet connection avaliable
+
+Added support for custom templates
+
+Added "Open Custom Templates Directory" command
+
 ### 1.6.0
 
 Added `Create getter`, `Create setter` and `Create getter and setter` commands. This is in very early stages, so bugs will happen. Please report any bugs to the issues page on GitHub :)
 
-### 1.5.3
-
-Updated readme
-
-### 1.5.2
-
-Fix Windows using PowerShell
-
-### 1.5.1
-
-Fix files opening only in preview
-
-### 1.5.0
-
-Added configuration to force use of cmd.exe in Windows instead of PowerShell
-
-Open both files when creating a class, avoid previewing only
-
-Added debugging configurations for GDB and Visual Studio Debugger
 
 [version-badge]: https://vsmarketplacebadge.apphb.com/version/ACharLuk.easy-cpp-projects.svg
 [installs-badge]: https://vsmarketplacebadge.apphb.com/installs/ACharLuk.easy-cpp-projects.svg

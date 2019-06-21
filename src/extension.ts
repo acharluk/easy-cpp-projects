@@ -195,6 +195,8 @@ const downloadTemplate = async (files: EasyProjectsJSON, templateName: string, f
             }
         }
     }
+
+    writeFileSync(`${folder}/.vscode/.easycpp`, 'This file is created by Easy C++ Projects, please ignore and do not delete it');
 };
 
 

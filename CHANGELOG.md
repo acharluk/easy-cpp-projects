@@ -1,5 +1,17 @@
 # Change Log
 
+## 1.7.1
+
+Load extension when the file .vscode/.easycpp is present, avoiding loading it when there is a tasks.json but it is not an Easy C++ project
+
+## 1.7.0
+
+Added support for offline templates if there is no Internet connection avaliable
+
+Added support for custom templates
+
+Added "Open Custom Templates Directory" command
+
 ## 1.6.0
 
 Added `Create getter`, `Create setter` and `Create getter and setter` commands. This is in very early stages, so bugs will happen. Please report any bugs to the issues page on GitHub :)
