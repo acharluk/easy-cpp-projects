@@ -1,8 +1,10 @@
 'use strict';
 
 import * as vscode from 'vscode';
+import * as os from 'os';
 import { mkdirSync, writeFileSync, existsSync, readFileSync } from 'fs';
 import fetch from 'node-fetch';
+import { spawn } from "child_process";
 
 const baseUrl = 'https://raw.githubusercontent.com/acharluk/easy-cpp-projects/master';
 
@@ -26,6 +28,7 @@ export function activate(context: vscode.ExtensionContext) {
     let createGetterSetterCommand = vscode.commands.registerCommand('easycpp.createGetterSetter', createGetterSetter);
     let createGetterCommand = vscode.commands.registerCommand('easycpp.createGetter', createGetter);
     let createSetterCommand = vscode.commands.registerCommand('easycpp.createSetter', createSetter);
+    let openCustomTemplateCommand = vscode.commands.registerCommand('easycpp.openCustomDir', openCustomDir);
 
     let buildButton = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 0);
     buildButton.command = 'workbench.action.tasks.build';
@@ -46,9 +49,25 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(createGetterSetterCommand);
     context.subscriptions.push(createGetterCommand);
     context.subscriptions.push(createSetterCommand);
+    context.subscriptions.push(openCustomTemplateCommand);
 }
 
 export function deactivate() {
+}
+
+const openCustomDir = () => {
+    let e = vscode.extensions.getExtension('ACharLuk.easy-cpp-projects');
+    if (!e) return;
+    let dir = e.extensionPath;
+
+    const currentOs = os.type();
+    if (currentOs === 'Linux') {
+        spawn('xdg-open', [`${dir}/out/templates/custom`]);
+    } else if (currentOs === 'Darwin') {
+        spawn('open', [`${dir}/out/templates/custom`]);
+    } else if (currentOs === 'Windows_NT') {
+        spawn('explorer', [`${dir}\\out\\templates\\custom`]);
+    }
 }
 
 const createClass = async () => {

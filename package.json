@@ -2,7 +2,7 @@
     "name": "easy-cpp-projects",
     "displayName": "Easy C++ projects",
     "description": "Create C++ projects easily for GCC and WSL-GCC",
-    "version": "1.6.0",
+    "version": "1.7.0",
     "publisher": "ACharLuk",
     "icon": "logo.png",
     "repository": {
@@ -41,6 +41,10 @@
             {
                 "command": "easycpp.createSetter",
                 "title": "Easy Cpp/C++: Create Setter"
+            },
+            {
+                "command": "easycpp.openCustomDir",
+                "title": "Easy Cpp/C++: Open Custom Templates Directory"
             }
         ],
         "keybindings": [
