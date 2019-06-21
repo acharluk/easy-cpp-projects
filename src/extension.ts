@@ -1,7 +1,7 @@
 'use strict';
 
 import * as vscode from 'vscode';
-import { mkdirSync, writeFileSync, existsSync, readFileSync, readFile } from 'fs';
+import { mkdirSync, writeFileSync, existsSync, readFileSync } from 'fs';
 import fetch from 'node-fetch';
 
 const baseUrl = 'https://raw.githubusercontent.com/acharluk/easy-cpp-projects/master';
