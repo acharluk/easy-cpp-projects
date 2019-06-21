@@ -53,7 +53,7 @@ export function deactivate() {
 
 const createClass = async () => {
     try {
-        const  data = await fetch(`${baseUrl}/templates/classes/files.json`);
+        const data = await fetch(`${baseUrl}/templates/classes/files.json`);
         const templates: EasyClassesJSON = await data.json();
         const template_files = [];
         for (let tname in templates) { template_files.push(tname); }
@@ -62,7 +62,7 @@ const createClass = async () => {
         if (!selected) { return; }
 
         const val = await vscode.window.showInputBox({ prompt: `Enter class name` });
-        if (!val || ! vscode.window.activeTextEditor) { return; }
+        if (!val || !vscode.window.activeTextEditor) { return; }
 
         const currentFolderWorkspace = vscode.workspace.getWorkspaceFolder(vscode.window.activeTextEditor.document.uri);
         if (!currentFolderWorkspace) { return; }
@@ -75,9 +75,9 @@ const createClass = async () => {
             writeFileSync(`${currentFolder}/${templates[selected][file].folder}/${val}.${templates[selected][file].extension}`, data);
 
             vscode.workspace.openTextDocument(`${currentFolder}/${templates[selected][file].folder}/${val}.${templates[selected][file].extension}`)
-            .then(doc => vscode.window.showTextDocument(doc, { preview: false }));
+                .then(doc => vscode.window.showTextDocument(doc, { preview: false }));
         }
-    } catch(err) {
+    } catch (err) {
         vscode.window.showErrorMessage(`Easy C++ error: ${err}`);
     }
 };
@@ -87,35 +87,43 @@ const createProject = async (local?: boolean) => {
         vscode.window.showErrorMessage("Open a folder or workspace before creating a project!");
         return;
     }
+    let templates = [];
 
-    if (local) {
-        try {
+    try {
+        let data;
+        if (local) {
             const res = readFileSync(`${__dirname}/templates/project/files.json`);
-            const data = JSON.parse(res.toString());
-            let templates = [];
-            for (let tname in data.templates) { templates.push(tname); }
-            
-            const selected = await vscode.window.showQuickPick(templates);
-            await selectFolderAndDownload(data, selected, local);
-            vscode.workspace.getConfiguration('files').update('associations', { "*.tpp":"cpp" }, vscode.ConfigurationTarget.Workspace);
-            vscode.workspace.getConfiguration('terminal.integrated.shell').update('windows', "cmd.exe", vscode.ConfigurationTarget.Workspace);
-        } catch(error) {
-            vscode.window.showErrorMessage(`Easy C++ Projects error: Could not load 'files.json' locally\nError: ${error}`);
-        }
-    } else {
-        try {
+            data = JSON.parse(res.toString());
+        } else {
             const res = await fetch(`${baseUrl}/templates/project/files.json`);
-            const data = await res.json();
-            let templates = [];
+            data = await res.json();
+        }
+
+        for (let tname in data.templates) { templates.push(tname); }
+        templates.push("Custom templates");
+
+        const selected = await vscode.window.showQuickPick(templates);
+        if (selected === "Custom templates") {
+            const res = readFileSync(`${__dirname}/templates/custom/files.json`);
+            const data = JSON.parse(res.toString());
+            templates = [];
             for (let tname in data.templates) { templates.push(tname); }
-            
+
             const selected = await vscode.window.showQuickPick(templates);
-            await selectFolderAndDownload(data, selected);
-            vscode.workspace.getConfiguration('files').update('associations', { "*.tpp":"cpp" }, vscode.ConfigurationTarget.Workspace);
+            await selectFolderAndDownload(data, selected, true);
+            vscode.workspace.getConfiguration('files').update('associations', { "*.tpp": "cpp" }, vscode.ConfigurationTarget.Workspace);
             vscode.workspace.getConfiguration('terminal.integrated.shell').update('windows', "cmd.exe", vscode.ConfigurationTarget.Workspace);
-        } catch(error) {
+        } else {
+            await selectFolderAndDownload(data, selected, local);
+            vscode.workspace.getConfiguration('files').update('associations', { "*.tpp": "cpp" }, vscode.ConfigurationTarget.Workspace);
+            vscode.workspace.getConfiguration('terminal.integrated.shell').update('windows', "cmd.exe", vscode.ConfigurationTarget.Workspace);
+        }
+    } catch (error) {
+        if (local) {
+            vscode.window.showErrorMessage(`Easy C++ Projects error: Could not load 'files.json' locally.\nError: ${error}`);
+        } else {
             vscode.window.showWarningMessage(`Easy C++ Projects error: Could not fetch 'files.json' from GitHub, using local files.\nError: ${error}`);
-            if (!local) { createProject(true) }
+            createProject(true);
         }
     }
 };
@@ -129,7 +137,7 @@ const selectFolderAndDownload = async (files: EasyProjectsJSON, templateName: st
             if (!chosen) { return; }
             let folder = chosen.uri;
             await downloadTemplate(files, templateName, folder.fsPath, local);
-        } catch(err) {
+        } catch (err) {
             vscode.window.showErrorMessage(`Easy C++ error: ${err}`);
         }
 
@@ -145,31 +153,25 @@ const downloadTemplate = async (files: EasyProjectsJSON, templateName: string, f
         }
     });
 
-    if (local) {
-        for (let file in files.templates[templateName]) {
-            try {
-                const data = readFileSync(`${__dirname}/templates/project/${file}`).toString();
-                
-                writeFileSync(`${folder}/${files.templates[templateName][file]}`, data);
-                if (files.templates[templateName][file] === 'src/main.cpp') {
-                    vscode.workspace.openTextDocument(`${folder}/src/main.cpp`)
-                    .then(doc => vscode.window.showTextDocument(doc, { preview: false }));
-                }
-            } catch(error) {
-                vscode.window.showErrorMessage(`Easy C++ Projects error: Could not load '${file}' locally\nError: ${error}`);
-            }
-        }
-    } else {
-        for (let file in files.templates[templateName]) {
-            try {
+    for (let file in files.templates[templateName]) {
+        try {
+            let data;
+            if (local) {
+                data = readFileSync(`${__dirname}/templates/project/${file}`).toString();
+            } else {
                 const res = await fetch(`${baseUrl}/templates/project/${file}`);
-                const data = await res.text();
-                writeFileSync(`${folder}/${files.templates[templateName][file]}`, data);
-                if (files.templates[templateName][file] === 'src/main.cpp') {
-                    vscode.workspace.openTextDocument(`${folder}/src/main.cpp`)
+                data = await res.text();
+            }
+
+            writeFileSync(`${folder}/${files.templates[templateName][file]}`, data);
+            if (files.templates[templateName][file] === 'src/main.cpp') {
+                vscode.workspace.openTextDocument(`${folder}/src/main.cpp`)
                     .then(doc => vscode.window.showTextDocument(doc, { preview: false }));
-                }
-            } catch(error) {
+            }
+        } catch (error) {
+            if (local) {
+                vscode.window.showErrorMessage(`Easy C++ Projects error: Could not load '${file}' locally.\nError: ${error}`);
+            } else {
                 vscode.window.showWarningMessage(`Easy C++ Projects error: Could not download '${file}' from GitHub, using local files.\nError: ${error}`);
             }
         }
@@ -177,33 +179,37 @@ const downloadTemplate = async (files: EasyProjectsJSON, templateName: string, f
 };
 
 
-const createGetterSetter = (getter ?: boolean, setter ?: boolean) => {
+const createGetterSetter = (getter?: boolean, setter?: boolean) => {
     if (!getter && !setter) {
         getter = setter = true;
     }
     let editor = vscode.window.activeTextEditor;
     if (!editor) { return; }
 
-    const getterSnippet = (variableName: string, variableType: string) => { return new vscode.SnippetString(`
+    const getterSnippet = (variableName: string, variableType: string) => {
+        return new vscode.SnippetString(`
     ${variableType} get${variableName.charAt(0).toUpperCase() + variableName.substring(1)}() {
         return ${variableName};
     }
-    `);};
-    const setterSnippet = (variableName: string, variableType: string) => { return new vscode.SnippetString(`
+    `);
+    };
+    const setterSnippet = (variableName: string, variableType: string) => {
+        return new vscode.SnippetString(`
     void set${variableName.charAt(0).toUpperCase() + variableName.substring(1)}(${variableType} ${variableName}) {
         this->${variableName} = ${variableName};
     }
-    `);};
+    `);
+    };
 
     let selection = editor.selection;
     let selectedText = editor.document.getText(new vscode.Range(selection.start, selection.end)).trim();
 
     let lines = selectedText.split('\n');
 
-    let createData :{type: string, name: string}[] = [];
+    let createData: { type: string, name: string }[] = [];
 
     for (let line of lines) {
-        if(!/\s*\w+\s+[*]*\w+\s*(,\s*\w+\s*)*;+/.test(line)) {
+        if (!/\s*\w+\s+[*]*\w+\s*(,\s*\w+\s*)*;+/.test(line)) {
             vscode.window.showErrorMessage(`Syntax error, cannot create getter or setter: ${line}`);
             return;
         }
@@ -225,8 +231,8 @@ const createGetterSetter = (getter ?: boolean, setter ?: boolean) => {
     }
 
     for (let e of createData) {
-        if (getter) { editor.insertSnippet(getterSnippet(e.name, e.type), new vscode.Position(selection.end.line+1, 0)); }
-        if (setter) { editor.insertSnippet(setterSnippet(e.name, e.type), new vscode.Position(selection.end.line+1, 0)); }
+        if (getter) { editor.insertSnippet(getterSnippet(e.name, e.type), new vscode.Position(selection.end.line + 1, 0)); }
+        if (setter) { editor.insertSnippet(setterSnippet(e.name, e.type), new vscode.Position(selection.end.line + 1, 0)); }
     }
 };
 
