@@ -29,6 +29,7 @@ export function activate(context: vscode.ExtensionContext) {
     let createGetterCommand = vscode.commands.registerCommand('easycpp.createGetter', createGetter);
     let createSetterCommand = vscode.commands.registerCommand('easycpp.createSetter', createSetter);
     let openCustomTemplateCommand = vscode.commands.registerCommand('easycpp.openCustomDir', openCustomDir);
+    let convertToEasyProjectCommand = vscode.commands.registerCommand('easycpp.convertToEasyProject', convertToEasyProject);
 
     let buildButton = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 0);
     buildButton.command = 'workbench.action.tasks.build';
@@ -50,9 +51,24 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(createGetterCommand);
     context.subscriptions.push(createSetterCommand);
     context.subscriptions.push(openCustomTemplateCommand);
+    context.subscriptions.push(convertToEasyProjectCommand);
 }
 
 export function deactivate() {
+}
+
+const convertToEasyProject = () => {
+    let wpath = vscode.workspace.workspaceFolders;
+    if (!wpath) {
+        vscode.window.showErrorMessage(`A directory must be opened to run this command!`);
+        return;
+    }
+
+    let path = wpath[0].uri.fsPath;
+    if (!existsSync(`${path}/.vscode`)) {
+        mkdirSync(`${path}/.vscode`);
+    }
+    writeFileSync(`${path}/.vscode/.easycpp`, 'This file is created by Easy C++ Projects, please ignore and do not delete it');
 }
 
 const openCustomDir = () => {

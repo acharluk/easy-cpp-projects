@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.7.2
+
+Added "Convert this folder to an Easy C++ Project" command
+
 ## 1.7.1
 
 Load extension when the file .vscode/.easycpp is present, avoiding loading it when there is a tasks.json but it is not an Easy C++ project
