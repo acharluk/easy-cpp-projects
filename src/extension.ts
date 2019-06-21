@@ -110,7 +110,7 @@ const createProject = async (local?: boolean) => {
             for (let tname in data.templates) { templates.push(tname); }
 
             const selected = await vscode.window.showQuickPick(templates);
-            await selectFolderAndDownload(data, selected, true);
+            await selectFolderAndDownload(data, selected, true, true);
             vscode.workspace.getConfiguration('files').update('associations', { "*.tpp": "cpp" }, vscode.ConfigurationTarget.Workspace);
             vscode.workspace.getConfiguration('terminal.integrated.shell').update('windows', "cmd.exe", vscode.ConfigurationTarget.Workspace);
         } else {
@@ -128,7 +128,7 @@ const createProject = async (local?: boolean) => {
     }
 };
 
-const selectFolderAndDownload = async (files: EasyProjectsJSON, templateName: string | undefined, local?: boolean) => {
+const selectFolderAndDownload = async (files: EasyProjectsJSON, templateName: string | undefined, local?: boolean, custom?: boolean) => {
     if (!templateName || !vscode.workspace.workspaceFolders) { return; }
 
     if (vscode.workspace.workspaceFolders.length > 1) {
@@ -142,11 +142,11 @@ const selectFolderAndDownload = async (files: EasyProjectsJSON, templateName: st
         }
 
     } else {
-        downloadTemplate(files, templateName, vscode.workspace.workspaceFolders[0].uri.fsPath, local);
+        downloadTemplate(files, templateName, vscode.workspace.workspaceFolders[0].uri.fsPath, local, custom);
     }
 };
 
-const downloadTemplate = async (files: EasyProjectsJSON, templateName: string, folder: string, local?: boolean) => {
+const downloadTemplate = async (files: EasyProjectsJSON, templateName: string, folder: string, local?: boolean, custom?: boolean) => {
     files.directories.forEach((dir: string) => {
         if (!existsSync(`${folder}/${dir}`)) {
             mkdirSync(`${folder}/${dir}`);
@@ -157,7 +157,7 @@ const downloadTemplate = async (files: EasyProjectsJSON, templateName: string, f
         try {
             let data;
             if (local) {
-                data = readFileSync(`${__dirname}/templates/project/${file}`).toString();
+                data = readFileSync(`${__dirname}/templates/${custom ? 'custom' : 'project'}/${file}`).toString();
             } else {
                 const res = await fetch(`${baseUrl}/templates/project/${file}`);
                 data = await res.text();
