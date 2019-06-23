@@ -63,11 +63,15 @@
 
 ## Release Notes
 
+### 1.7.4
+
+Fix Easy C++ placeholder not being created when using a custom template
+
 ### 1.7.3
 
 New files.json format, now each template can have different directories and blank files created
 
-## 1.7.2
+### 1.7.2
 
 Added "Convert this folder to an Easy C++ Project" command
 

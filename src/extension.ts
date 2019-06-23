@@ -243,6 +243,9 @@ const downloadTemplate = async (files: EasyProjectsJSON, templateName: string, f
         }
     }
 
+    if (!existsSync(`${folder}/.vscode`)) {
+        mkdirSync(`${folder}/.vscode`);
+    }
     writeFileSync(`${folder}/.vscode/.easycpp`, 'This file is created by Easy C++ Projects, please ignore and do not delete it');
 };
 
