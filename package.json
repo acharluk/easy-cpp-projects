@@ -2,7 +2,7 @@
     "name": "easy-cpp-projects",
     "displayName": "Easy C++ projects",
     "description": "Create C++ projects easily for GCC and WSL-GCC",
-    "version": "1.7.2",
+    "version": "1.7.3",
     "publisher": "ACharLuk",
     "icon": "logo.png",
     "repository": {

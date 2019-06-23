@@ -1,41 +1,51 @@
 {
-    "directories":[
+    "version": "2",
+    "directories": [
         ".vscode",
         "bin",
         "include",
         "lib",
         "src"
     ],
-    "templates":{
-        "[G++/GDB] Linux":{
-            "shared/Makefile":"Makefile",
-            "shared/tasks.json":".vscode/tasks.json",
-            "hello-world/main.cpp": "src/main.cpp",
-            "gcc/launch.json":".vscode/launch.json"
+    "templates": {
+        "[G++/GDB] Linux": {
+            "files": {
+                "shared/Makefile": "Makefile",
+                "shared/tasks.json": ".vscode/tasks.json",
+                "hello-world/main.cpp": "src/main.cpp",
+                "gcc/launch.json": ".vscode/launch.json"
+            }
         },
-        "[Clang++/LLDB] macOS":{
-            "clang/Makefile":"Makefile",
-            "shared/tasks.json":".vscode/tasks.json",
-            "hello-world/main.cpp": "src/main.cpp",
-            "clang/launch.json":".vscode/launch.json"
+        "[Clang++/LLDB] macOS": {
+            "files": {
+                "clang/Makefile": "Makefile",
+                "shared/tasks.json": ".vscode/tasks.json",
+                "hello-world/main.cpp": "src/main.cpp",
+                "clang/launch.json": ".vscode/launch.json"
+            }
         },
-        "[WSL] Windows Subsystem for Linux":{
-            "shared/Makefile":"Makefile",
-            "wsl/tasks.json":".vscode/tasks.json",
-            "hello-world/main.cpp": "src/main.cpp"
+        "[WSL] Windows Subsystem for Linux": {
+            "files": {
+                "shared/Makefile": "Makefile",
+                "wsl/tasks.json": ".vscode/tasks.json",
+                "hello-world/main.cpp": "src/main.cpp"
+            }
         },
-        "[MSVC] Windows x64, Visual Studio Build Tools 2017":{
-            "msvc/build_x64.bat":"build.bat",
-            "msvc/tasks.json":".vscode/tasks.json",
-            "hello-world/main.cpp": "src/main.cpp",
-            "msvc/launch.json":".vscode/launch.json"
+        "[MSVC] Windows x64, Visual Studio Build Tools 2017": {
+            "files": {
+                "msvc/build_x64.bat": "build.bat",
+                "msvc/tasks.json": ".vscode/tasks.json",
+                "hello-world/main.cpp": "src/main.cpp",
+                "msvc/launch.json": ".vscode/launch.json"
+            }
         },
-        "[MSVC] Windows x86, Visual Studio Build Tools 2017":{
-            "msvc/build_x86.bat":"build.bat",
-            "msvc/tasks.json":".vscode/tasks.json",
-            "hello-world/main.cpp": "src/main.cpp",
-            "msvc/launch.json":".vscode/launch.json"
+        "[MSVC] Windows x86, Visual Studio Build Tools 2017": {
+            "files": {
+                "msvc/build_x86.bat": "build.bat",
+                "msvc/tasks.json": ".vscode/tasks.json",
+                "hello-world/main.cpp": "src/main.cpp",
+                "msvc/launch.json": ".vscode/launch.json"
+            }
         }
     }
-
 }

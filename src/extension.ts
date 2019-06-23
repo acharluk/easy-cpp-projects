@@ -9,9 +9,17 @@ import { spawn } from "child_process";
 const baseUrl = 'https://raw.githubusercontent.com/acharluk/easy-cpp-projects/master';
 
 interface EasyProjectsJSON {
-    directories: string[];
-    templates: { [name: string]: { [from: string]: string } };
+    version: string;
+    directories?: string[];
+    templates: {
+        [templateName: string]: {
+            directories?: [string];
+            blankFiles?: [string];
+            files?: { [from: string]: string };
+        };
+    };
 }
+
 
 interface EasyClassesJSON {
     [className: string]: {
@@ -69,11 +77,11 @@ const convertToEasyProject = () => {
         mkdirSync(`${path}/.vscode`);
     }
     writeFileSync(`${path}/.vscode/.easycpp`, 'This file is created by Easy C++ Projects, please ignore and do not delete it');
-}
+};
 
 const openCustomDir = () => {
     let e = vscode.extensions.getExtension('ACharLuk.easy-cpp-projects');
-    if (!e) return;
+    if (!e) { return; }
     let dir = e.extensionPath;
 
     const currentOs = os.type();
@@ -84,7 +92,7 @@ const openCustomDir = () => {
     } else if (currentOs === 'Windows_NT') {
         spawn('explorer', [`${dir}\\out\\templates\\custom`]);
     }
-}
+};
 
 const createClass = async () => {
     try {
@@ -182,32 +190,55 @@ const selectFolderAndDownload = async (files: EasyProjectsJSON, templateName: st
 };
 
 const downloadTemplate = async (files: EasyProjectsJSON, templateName: string, folder: string, local?: boolean, custom?: boolean) => {
-    files.directories.forEach((dir: string) => {
-        if (!existsSync(`${folder}/${dir}`)) {
-            mkdirSync(`${folder}/${dir}`);
-        }
-    });
-
-    for (let file in files.templates[templateName]) {
-        try {
-            let data;
-            if (local) {
-                data = readFileSync(`${__dirname}/templates/${custom ? 'custom' : 'project'}/${file}`).toString();
-            } else {
-                const res = await fetch(`${baseUrl}/templates/project/${file}`);
-                data = await res.text();
+    if (files.directories) {
+        files.directories.forEach((dir: string) => {
+            if (!existsSync(`${folder}/${dir}`)) {
+                mkdirSync(`${folder}/${dir}`);
             }
+        });
+    }
 
-            writeFileSync(`${folder}/${files.templates[templateName][file]}`, data);
-            if (files.templates[templateName][file] === 'src/main.cpp') {
-                vscode.workspace.openTextDocument(`${folder}/src/main.cpp`)
-                    .then(doc => vscode.window.showTextDocument(doc, { preview: false }));
+    let directories = files.templates[templateName].directories;
+    if (directories) {
+        directories.forEach((dir: string) => {
+            if (!existsSync(`${folder}/${dir}`)) {
+                mkdirSync(`${folder}/${dir}`);
             }
-        } catch (error) {
-            if (local) {
-                vscode.window.showErrorMessage(`Easy C++ Projects error: Could not load '${file}' locally.\nError: ${error}`);
-            } else {
-                vscode.window.showWarningMessage(`Easy C++ Projects error: Could not download '${file}' from GitHub, using local files.\nError: ${error}`);
+        });
+    }
+
+    let blankFiles = files.templates[templateName].blankFiles;
+    if (blankFiles) {
+        blankFiles.forEach((file: string) => {
+            if (!existsSync(`${folder}/${file}`)) {
+                writeFileSync(`${folder}/${file}`, '');
+            }
+        });
+    }
+
+    let f = files.templates[templateName].files;
+    if (f) {
+        for (let file in f) {
+            try {
+                let data;
+                if (local) {
+                    data = readFileSync(`${__dirname}/templates/${custom ? 'custom' : 'project'}/${file}`).toString();
+                } else {
+                    const res = await fetch(`${baseUrl}/templates/project/${file}`);
+                    data = await res.text();
+                }
+
+                writeFileSync(`${folder}/${f[file]}`, data);
+                if (f[file] === 'src/main.cpp') {
+                    vscode.workspace.openTextDocument(`${folder}/src/main.cpp`)
+                        .then(doc => vscode.window.showTextDocument(doc, { preview: false }));
+                }
+            } catch (error) {
+                if (local) {
+                    vscode.window.showErrorMessage(`Easy C++ Projects error: Could not load '${file}' locally.\nError: ${error}`);
+                } else {
+                    vscode.window.showWarningMessage(`Easy C++ Projects error: Could not download '${file}' from GitHub, using local files.\nError: ${error}`);
+                }
             }
         }
     }
