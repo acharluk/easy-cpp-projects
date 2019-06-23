@@ -16,6 +16,7 @@ interface EasyProjectsJSON {
             directories?: [string];
             blankFiles?: [string];
             files?: { [from: string]: string };
+            openFiles?: [string];
         };
     };
 }
@@ -239,6 +240,16 @@ const downloadTemplate = async (files: EasyProjectsJSON, templateName: string, f
                 } else {
                     vscode.window.showWarningMessage(`Easy C++ Projects error: Could not download '${file}' from GitHub, using local files.\nError: ${error}`);
                 }
+            }
+        }
+    }
+
+    let openFiles = files.templates[templateName].openFiles;
+    if (openFiles) {
+        for (let file of openFiles) {
+            if (existsSync(`${folder}/${file}`)) {
+                vscode.workspace.openTextDocument(`${folder}/${file}`)
+                    .then(doc => vscode.window.showTextDocument(doc, { preview: false }));
             }
         }
     }
