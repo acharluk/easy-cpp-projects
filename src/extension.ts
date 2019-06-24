@@ -230,10 +230,6 @@ const downloadTemplate = async (files: EasyProjectsJSON, templateName: string, f
                 }
 
                 writeFileSync(`${folder}/${f[file]}`, data);
-                if (f[file] === 'src/main.cpp') {
-                    vscode.workspace.openTextDocument(`${folder}/src/main.cpp`)
-                        .then(doc => vscode.window.showTextDocument(doc, { preview: false }));
-                }
             } catch (error) {
                 if (local) {
                     vscode.window.showErrorMessage(`Easy C++ Projects error: Could not load '${file}' locally.\nError: ${error}`);

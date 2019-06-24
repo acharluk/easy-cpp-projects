@@ -63,6 +63,10 @@
 
 ## Release Notes
 
+### 1.7.5
+
+Added "openFiles" property to JSON. It allows the user to set multiple files to open automatically on project creation
+
 ### 1.7.4
 
 Fix Easy C++ placeholder not being created when using a custom template

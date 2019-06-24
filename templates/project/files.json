@@ -14,7 +14,10 @@
                 "shared/tasks.json": ".vscode/tasks.json",
                 "hello-world/main.cpp": "src/main.cpp",
                 "gcc/launch.json": ".vscode/launch.json"
-            }
+            },
+            "openFiles":[
+                "src/main.cpp"
+            ]
         },
         "[Clang++/LLDB] macOS": {
             "files": {
@@ -22,14 +25,20 @@
                 "shared/tasks.json": ".vscode/tasks.json",
                 "hello-world/main.cpp": "src/main.cpp",
                 "clang/launch.json": ".vscode/launch.json"
-            }
+            },
+            "openFiles":[
+                "src/main.cpp"
+            ]
         },
         "[WSL] Windows Subsystem for Linux": {
             "files": {
                 "shared/Makefile": "Makefile",
                 "wsl/tasks.json": ".vscode/tasks.json",
                 "hello-world/main.cpp": "src/main.cpp"
-            }
+            },
+            "openFiles":[
+                "src/main.cpp"
+            ]
         },
         "[MSVC] Windows x64, Visual Studio Build Tools 2017": {
             "files": {
@@ -37,7 +46,10 @@
                 "msvc/tasks.json": ".vscode/tasks.json",
                 "hello-world/main.cpp": "src/main.cpp",
                 "msvc/launch.json": ".vscode/launch.json"
-            }
+            },
+            "openFiles":[
+                "src/main.cpp"
+            ]
         },
         "[MSVC] Windows x86, Visual Studio Build Tools 2017": {
             "files": {
@@ -45,7 +57,10 @@
                 "msvc/tasks.json": ".vscode/tasks.json",
                 "hello-world/main.cpp": "src/main.cpp",
                 "msvc/launch.json": ".vscode/launch.json"
-            }
+            },
+            "openFiles":[
+                "src/main.cpp"
+            ]
         }
     }
 }

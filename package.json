@@ -1,8 +1,8 @@
 {
     "name": "easy-cpp-projects",
     "displayName": "Easy C++ projects",
-    "description": "Create C++ projects easily for GCC and WSL-GCC",
-    "version": "1.7.4",
+    "description": "Create C++ projects easily for GCC, WSL-GCC, Clang and MSVC",
+    "version": "1.7.5",
     "publisher": "ACharLuk",
     "icon": "logo.png",
     "repository": {
