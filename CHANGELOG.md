@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.7.6
+
+Added support for Visual Studio Build Tools 2019
+
 ## 1.7.5
 
 Added "openFiles" property to JSON. It allows the user to set multiple files to open automatically on project creation
