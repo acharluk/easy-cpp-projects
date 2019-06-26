@@ -20,6 +20,21 @@ const customTemplatesFolder = (() => {
     if (!existsSync(dir)) {
         try {
             mkdirSync(dir);
+            writeFileSync(`${dir}/files.json`, `{
+    "templates": {
+        "Example Custom Template": {
+            "directories": [
+                "ExampleDirectory"
+            ],
+            "blankFiles": [
+                "HelloWorld.txt"
+            ],
+            "openFiles": [
+                "HelloWorld.txt"
+            ]
+        }
+    }
+}`);
         } catch (err) {
             console.error(err);
         }
