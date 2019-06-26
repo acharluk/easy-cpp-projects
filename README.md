@@ -5,9 +5,6 @@
 >## If you created a project with this extension before version 1.7.0 (Jun 21st 2019), please run "Convert this folder to an Easy C++ Project"
 >### If you don't do this the extension won't load when the folder is opened. Until now, the extension looked for the tasks.json file, and it loaded when any project with tasks was opened. Now it will only load automatically when it is an Easy C++ Project.
 
-# Important note #2
->## Do not use the custom templates feature yet, or keep a backup of the folder. Right now custom templates are inside the extension folder itself, and it is wiped every time the extension updates!
-
 ## Features
 
 ### Create C++ projects and classes with just few clicks, for MSVC, GCC and Clang
@@ -65,6 +62,10 @@
 ---
 
 ## Release Notes
+
+### 1.7.7
+
+Changed custom templates folder location, now it is safe to save templates and they won't be removed upon extension updates
 
 ### 1.7.6
 

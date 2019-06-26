@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.7.7
+
+Changed custom templates folder location, now it is safe to save templates and they won't be removed upon extension updates
+
 ## 1.7.6
 
 Added support for Visual Studio Build Tools 2019

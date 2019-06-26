@@ -8,6 +8,26 @@ import { spawn } from "child_process";
 
 const baseUrl = 'https://raw.githubusercontent.com/acharluk/easy-cpp-projects/master';
 
+const customTemplatesFolder = (() => {
+    let e = vscode.extensions.getExtension('ACharLuk.easy-cpp-projects');
+    if (!e) { return ''; }
+
+    let dir = `${e.extensionPath}\\..\\easycpp_custom_templates`;
+    if (os.type() !== 'Windows_NT') {
+        dir = `${e.extensionPath}/../easycpp_custom_templates`;
+    }
+
+    if (!existsSync(dir)) {
+        try {
+            mkdirSync(dir);
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    return dir;
+})();
+
 interface EasyProjectsJSON {
     version: string;
     directories?: string[];
@@ -81,17 +101,15 @@ const convertToEasyProject = () => {
 };
 
 const openCustomDir = () => {
-    let e = vscode.extensions.getExtension('ACharLuk.easy-cpp-projects');
-    if (!e) { return; }
-    let dir = e.extensionPath;
+    let dir = customTemplatesFolder;
 
     const currentOs = os.type();
     if (currentOs === 'Linux') {
-        spawn('xdg-open', [`${dir}/out/templates/custom`]);
+        spawn('xdg-open', [`${dir}`]); // /out/templates/custom
     } else if (currentOs === 'Darwin') {
-        spawn('open', [`${dir}/out/templates/custom`]);
+        spawn('open', [`${dir}`]);  // /out/templates/custom
     } else if (currentOs === 'Windows_NT') {
-        spawn('explorer', [`${dir}\\out\\templates\\custom`]);
+        spawn('explorer', [`${dir}`]); // \\out\\templates\\custom
     }
 };
 
@@ -148,7 +166,7 @@ const createProject = async (local?: boolean) => {
 
         const selected = await vscode.window.showQuickPick(templates);
         if (selected === "Custom templates") {
-            const res = readFileSync(`${__dirname}/templates/custom/files.json`);
+            const res = readFileSync(`${customTemplatesFolder}/files.json`);
             const data = JSON.parse(res.toString());
             templates = [];
             for (let tname in data.templates) { templates.push(tname); }
@@ -223,7 +241,11 @@ const downloadTemplate = async (files: EasyProjectsJSON, templateName: string, f
             try {
                 let data;
                 if (local) {
-                    data = readFileSync(`${__dirname}/templates/${custom ? 'custom' : 'project'}/${file}`).toString();
+                    if (custom) {
+                        data = readFileSync(`${customTemplatesFolder}/${file}`).toString();
+                    } else {
+                        data = readFileSync(`${__dirname}/templates/project/${file}`).toString();
+                    }
                 } else {
                     const res = await fetch(`${baseUrl}/templates/project/${file}`);
                     data = await res.text();
