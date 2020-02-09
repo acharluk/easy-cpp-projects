@@ -8,17 +8,6 @@
         "src"
     ],
     "templates": {
-        "[CMake] Cross-platform": {
-            "files": {
-                "CMake/CMakeLists.txt": "CMakeLists.txt",
-                "CMake/tasks.json": ".vscode/tasks.json",
-                "hello-world/main.cpp": "src/main.cpp",
-                "CMake/launch.json": ".vscode/launch.json"
-            },
-            "openFiles":[
-                "src/main.cpp"
-            ]
-        },
         "[G++/GDB] Linux": {
             "files": {
                 "shared/Makefile": "Makefile",
@@ -93,6 +82,20 @@
             },
             "openFiles":[
                 "src/main.cpp"
+            ]
+        },
+        "[CMake] Cross-platform (Created by KochankovID)": {
+            "files": {
+                "CMake/CMakeLists.txt": "CMakeLists.txt",
+                "CMake/tasks.json": ".vscode/tasks.json",
+                "hello-world/main.cpp": "src/main.cpp",
+                "CMake/launch.json": ".vscode/launch.json"
+            },
+            "openFiles":[
+                "src/main.cpp"
+            ],
+            "directories":[
+                "build"
             ]
         }
     }
