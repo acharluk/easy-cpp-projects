@@ -34,7 +34,7 @@
             "files": {
                 "mingw/Makefile": "Makefile",
                 "mingw/tasks.json": ".vscode/tasks.json",
-                "gcc/launch.json": ".vscode/launch.json",
+                "mingw/launch.json": ".vscode/launch.json",
                 "hello-world/main.cpp": "src/main.cpp"
             },
             "openFiles":[
