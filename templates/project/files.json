@@ -30,6 +30,17 @@
                 "src/main.cpp"
             ]
         },
+        "[MinGW] MinGW for windows": {
+            "files": {
+                "mingw/Makefile": "Makefile",
+                "mingw/tasks.json": ".vscode/tasks.json",
+                "gcc/launch.json": ".vscode/launch.json",
+                "hello-world/main.cpp": "src/main.cpp"
+            },
+            "openFiles":[
+                "src/main.cpp"
+            ]
+        },
         "[WSL] Windows Subsystem for Linux": {
             "files": {
                 "shared/Makefile": "Makefile",
