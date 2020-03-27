@@ -169,7 +169,7 @@ const createProject = async (local?: boolean) => {
     try {
         let data;
         if (local) {
-            const res = readFileSync(`${__dirname}/templates/project/files.json`);
+            const res = readFileSync(`${__dirname}/../templates/project/files.json`);
             data = JSON.parse(res.toString());
         } else {
             const res = await fetch(`${baseUrl}/templates/project/files.json`);
@@ -259,7 +259,7 @@ const downloadTemplate = async (files: EasyProjectsJSON, templateName: string, f
                     if (custom) {
                         data = readFileSync(`${customTemplatesFolder}/${file}`).toString();
                     } else {
-                        data = readFileSync(`${__dirname}/templates/project/${file}`).toString();
+                        data = readFileSync(`${__dirname}/../templates/project/${file}`).toString();
                     }
                 } else {
                     const res = await fetch(`${baseUrl}/templates/project/${file}`);
