@@ -2,31 +2,55 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build C++ project",
+            "label": "build_debug",
             "type": "shell",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "command": "cd ./build && make"
+            "command": "cd ./build && make",
+            "dependsOn": [
+                "build_cmake_debug"
+            ]
         },
         {
-            "label": "Build & run C++ project",
+            "label": "build_run",
             "type": "shell",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "command": "cd ./build && make && ./main"
+            "command": "cd ./build && make && ./main",
+            "dependsOn": [
+                "build_cmake"
+            ]
         },
         {
-            "label": "Build CMake",
+            "label": "build_cmake",
             "type": "shell",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
             "command": "cd ./build && cmake build .."
-        }
+        },
+        {
+            "label": "build_cmake_relwithdebinfo",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "command": "cd ./build && cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo .."
+        },
+        {
+            "label": "build_cmake_debug",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "command": "cd ./build && cmake -DCMAKE_BUILD_TYPE=Debug .."
+        },
     ]
 }
