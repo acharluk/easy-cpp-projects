@@ -9,6 +9,14 @@
                 "isDefault": true
             },
             "command": "cd ./build && make",
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
             "dependsOn": [
                 "build_cmake_debug"
             ]
@@ -21,6 +29,14 @@
                 "isDefault": true
             },
             "command": "cd ./build && make && ./main",
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
             "dependsOn": [
                 "build_cmake"
             ]
@@ -32,7 +48,15 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "command": "cd ./build && cmake build .."
+            "command": "cd ./build && cmake build ..",
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
         },
         {
             "label": "build_cmake_relwithdebinfo",
@@ -41,7 +65,15 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "command": "cd ./build && cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo .."
+            "command": "cd ./build && cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ..",
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
         },
         {
             "label": "build_cmake_debug",
@@ -50,7 +82,15 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "command": "cd ./build && cmake -DCMAKE_BUILD_TYPE=Debug .."
+            "command": "cd ./build && cmake -DCMAKE_BUILD_TYPE=Debug ..",
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
         },
     ]
 }
