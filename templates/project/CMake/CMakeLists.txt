@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(complex_number VERSION 0.1.0)
+project(new_project VERSION 0.1.0)
 
 if(MSVC)
   # Force to always compile with W4
