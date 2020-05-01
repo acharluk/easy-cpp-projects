@@ -11,6 +11,9 @@
     "engines": {
         "vscode": "^1.26.0"
     },
+    "extensionDependencies": [
+        "ms-vscode.cpptools"
+    ],
     "categories": [
         "Other"
     ],
