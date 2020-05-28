@@ -1,5 +1,13 @@
 # Change Log
 
+## 2.0.0
+
+Updated dependencies
+
+Fixed some bugs
+
+Introduced a few more bugs ;)
+
 ## 1.7.7
 
 Changed custom templates folder location, now it is safe to save templates and they won't be removed upon extension updates

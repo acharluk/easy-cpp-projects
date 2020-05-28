@@ -1,9 +1,24 @@
 [![Version][version-badge]][marketplace]
 [![Installs][installs-badge]][marketplace]
 
-# Important note!
->## If you created a project with this extension before version 1.7.0 (Jun 21st 2019), please run "Convert this folder to an Easy C++ Project"
->### If you don't do this the extension won't load when the folder is opened. Until now, the extension looked for the tasks.json file, and it loaded when any project with tasks was opened. Now it will only load automatically when it is an Easy C++ Project.
+# Important note, please read!
+## This extension will be discontinued soon. My new extension  **[![](logo_fenix.png)Fenix](https://marketplace.visualstudio.com/items?itemName=ACharLuk.fenix)** has been published!
+
+**All Easy C++ Projects templates are available in Fenix** today, please go ahead and try it! You just need to add Easy C++ Projects from the recommended tab in Fenix :)
+
+- Fenix provides the ability to run commands, add your own custom repositories and an overall better UI. Its aim is to extend the functionality Easy C++ Projects has.
+
+- It is also language agnostic, so it is not tied to C++ projects anymore. If you want to create a repository with templates for any other language you can do it!
+
+[![Fenix UI](fenix.png)](https://marketplace.visualstudio.com/items?itemName=ACharLuk.fenix)
+
+> I will still push some updates to Easy C++ Projects, but there won't be new features added.
+
+### Finally I want to thank all of you for the support you have given **Easy C++ Projects**. It's been my first ever big project. I did not expect that many people installing it, so thank you from the bottom of my heart for giving it a try and enjoying using it <3
+
+#### I you want to ask my anything or keep up with the development of my projects, I suggest you [follow me on Twitter at @ACharLuk](https://twitter.com/ACharLuk)
+
+---
 
 ## Features
 
@@ -62,6 +77,14 @@
 ---
 
 ## Release Notes
+
+### 2.0.0
+
+Updated dependencies
+
+Fixed some bugs
+
+Introduced a few more bugs ;)
 
 ### 1.7.7
 
