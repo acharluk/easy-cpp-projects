@@ -1,3 +1,5 @@
+![logo](logo.png?raw=true)
+
 [![Version][version-badge]][marketplace]
 [![Installs][installs-badge]][marketplace]
 
