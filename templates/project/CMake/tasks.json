@@ -2,31 +2,95 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build C++ project",
+            "label": "build_debug",
             "type": "shell",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "command": "cd ./build && make"
+            "command": "cd ./build && make",
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "dependsOn": [
+                "build_cmake_debug"
+            ]
         },
         {
-            "label": "Build & run C++ project",
+            "label": "build_run",
             "type": "shell",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "command": "cd ./build && make && ./main"
+            "command": "cd ./build && make && ./main",
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "dependsOn": [
+                "build_cmake"
+            ]
         },
         {
-            "label": "Build CMake",
+            "label": "build_cmake",
             "type": "shell",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "command": "cd ./build && cmake build .."
-        }
+            "command": "cd ./build && cmake build ..",
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
+        },
+        {
+            "label": "build_cmake_relwithdebinfo",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "command": "cd ./build && cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ..",
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
+        },
+        {
+            "label": "build_cmake_debug",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "command": "cd ./build && cmake -DCMAKE_BUILD_TYPE=Debug ..",
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
+        },
     ]
 }
