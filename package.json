@@ -97,6 +97,6 @@
         "typescript": "^3.9.3"
     },
     "dependencies": {
-        "node-fetch": "^2.6.0"
+        "node-fetch": "^2.6.7"
     }
 }
